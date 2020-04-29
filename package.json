@@ -55,6 +55,9 @@
     "tslib": "^1.11.1",
     "typescript": "^3.8.3"
   },
+  "files": [
+    "dist/*"
+  ],
   "keywords": [
     "react",
     "scroller",
