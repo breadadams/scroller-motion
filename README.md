@@ -1,3 +1,3 @@
-<h1 align="center">🛹 <br />scroller-motion</h1>
+<h2 align="center">🛹 <br />scroller-motion</h2>
 
 > Readme coming soon ⏲
