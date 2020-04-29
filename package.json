@@ -1,0 +1,69 @@
+{
+  "name": "scroller-motion",
+  "version": "0.0.0",
+  "description": "Elegant smooth scrolling for React apps through framer-motion",
+  "source": "src/index.ts",
+  "main": "dist/index.js",
+  "module": "dist/index.modern.js",
+  "umd:main": "dist/index.umd.js",
+  "types": "dist/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wombak/scroller-motion"
+  },
+  "bugs": {
+    "url": "https://github.com/wombak/scroller-motion/issues"
+  },
+  "scripts": {
+    "clean": "rm -rf dist",
+    "build": "npm run clean && microbundle --jsx React.createElement -f modern,cjs,umd",
+    "build:storybook": "build-storybook",
+    "dev": "start-storybook",
+    "prettier:format": "prettier --write .",
+    "prettier:check": "prettier --check ."
+  },
+  "author": "Brad Adams <hi@breadadams.com> (https://breadadams.com/)",
+  "license": "MIT",
+  "dependencies": {
+    "debounce-fn": "^4.0.0"
+  },
+  "peerDependencies": {
+    "framer-motion": "^1.10",
+    "react": "^16"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.9.0",
+    "@babel/plugin-proposal-optional-chaining": "^7.9.0",
+    "@storybook/addons": "^5.3.18",
+    "@storybook/preset-typescript": "^3.0.0",
+    "@storybook/react": "^5.3.18",
+    "@types/node": "^13.13.4",
+    "@types/react": "^16.9.34",
+    "@types/resize-observer-browser": "^0.1.3",
+    "@types/styled-components": "^5.1.0",
+    "babel-loader": "^8.1.0",
+    "fork-ts-checker-webpack-plugin": "^4.1.3",
+    "framer-motion": "^1.10.3",
+    "microbundle": "^0.12.0-next.8",
+    "prettier": "2.0.5",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "storybook-addon-jsx": "^7.2.3",
+    "storybook-addon-state": "^1.0.3",
+    "styled-components": "^5.1.0",
+    "ts-loader": "^7.0.1",
+    "tslib": "^1.11.1",
+    "typescript": "^3.8.3"
+  },
+  "keywords": [
+    "react",
+    "scroller",
+    "motion",
+    "spring",
+    "scroll",
+    "framer",
+    "framer-motion",
+    "parallax",
+    "smooth"
+  ]
+}

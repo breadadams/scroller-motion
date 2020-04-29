@@ -1,0 +1,1 @@
+export { useScrollerMotion } from './useScrollerMotion'
