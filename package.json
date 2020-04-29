@@ -7,6 +7,10 @@
   "module": "dist/index.modern.js",
   "umd:main": "dist/index.umd.js",
   "types": "dist/index.d.ts",
+  "author": "Wombak <hello@wombak.xyz> (https://wombak.xyz/)",
+  "contributors": [
+    "Brad Adams <hi@breadadams.com> (https://breadadams.com/)"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/wombak/scroller-motion"
@@ -22,7 +26,6 @@
     "prettier:format": "prettier --write .",
     "prettier:check": "prettier --check ."
   },
-  "author": "Brad Adams <hi@breadadams.com> (https://breadadams.com/)",
   "license": "MIT",
   "dependencies": {
     "debounce-fn": "^4.0.0"
