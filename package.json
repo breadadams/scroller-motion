@@ -11,6 +11,7 @@
   "contributors": [
     "Brad Adams <hi@breadadams.com> (https://breadadams.com/)"
   ],
+  "homepage": "https://scroller-motion.wombak.xyz",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/wombak/scroller-motion"
