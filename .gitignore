@@ -1,8 +1,8 @@
 node_modules
 .DS_Store
 *.log
-build
 dist
+storybook-static
 yarn.lock
 .vscode
 .rts2*
