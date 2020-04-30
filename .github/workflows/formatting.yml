@@ -1,0 +1,15 @@
+name: Formatting
+
+on: [push]
+
+jobs:
+  formatting-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 13
+      - run: npm install
+      - run: npm run prettier:check
