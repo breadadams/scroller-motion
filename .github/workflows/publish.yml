@@ -2,7 +2,10 @@ name: Publish
 
 on:
   release:
-    types: [published, prereleased]
+    types: [published]
+
+env:
+  IS_BETA: ${{ contains(github.event.release.tag_name, 'beta') }}
 
 jobs:
   publish-npm:
@@ -18,13 +21,13 @@ jobs:
         run: npm install
 
       - name: Publish package
-        if: ${{ github.event_name == 'published' }}
+        if: ${{ !env.IS_BETA }}
         run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
 
       - name: Publish beta package
-        if: ${{ github.event_name == 'prereleased' }}
+        if: ${{ env.IS_BETA }}
         run: npm publish --tag beta
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
