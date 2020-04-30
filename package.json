@@ -24,6 +24,7 @@
     "build": "npm run clean && microbundle --jsx React.createElement -f modern,cjs,umd",
     "build:storybook": "build-storybook",
     "dev": "start-storybook",
+    "prepublishOnly": "npm run build",
     "prettier:format": "prettier --write .",
     "prettier:check": "prettier --check ."
   },

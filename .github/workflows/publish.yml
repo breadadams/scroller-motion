@@ -1,0 +1,30 @@
+name: Publish
+
+on:
+  release:
+    types: [published, prereleased]
+
+jobs:
+  publish-npm:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 13
+          registry-url: https://registry.npmjs.org
+
+      - name: Install dependencies
+        - run: npm install
+
+      - name: Publish package
+        if: ${{ github.event_name == 'published' }}
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
+
+      - name: Publish beta package
+        if: ${{ github.event_name == 'prereleased' }}
+        run: npm publish --tag beta
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
