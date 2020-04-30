@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 
 import Core, { CoreProps } from './Core'
 
@@ -7,7 +7,13 @@ interface Props extends CoreProps {
 }
 
 const ScrollerMotion: React.FC<Props> = ({ children, disabled, ...props }) => {
-  if (disabled) {
+  const [render, setRender] = useState(false)
+
+  useEffect(() => {
+    setRender(true)
+  }, [])
+
+  if (!render || disabled) {
     return <Fragment>{children}</Fragment>
   }
 

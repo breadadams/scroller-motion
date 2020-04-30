@@ -29,6 +29,7 @@
   },
   "license": "MIT",
   "dependencies": {
+    "actual": "^0.4.0",
     "debounce-fn": "^4.0.0"
   },
   "peerDependencies": {

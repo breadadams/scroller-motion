@@ -1,13 +1,14 @@
 import { useCallback, useEffect, useState } from 'react'
-
-const getWindowHeight = (): number => window.innerHeight
+import actual from 'actual'
 
 const useWindowHeight = (): number => {
-  const [height, setHeight] = useState(getWindowHeight())
+  const [height, setHeight] = useState(0)
 
-  const onResize = useCallback(() => setHeight(getWindowHeight()), [])
+  const onResize = useCallback(() => setHeight(actual('height', 'px')), [])
 
   useEffect(() => {
+    onResize()
+
     window.addEventListener('resize', onResize, false)
 
     return () => {
