@@ -15,7 +15,7 @@ jobs:
           registry-url: https://registry.npmjs.org
 
       - name: Install dependencies
-        - run: npm install
+        run: npm install
 
       - name: Publish package
         if: ${{ github.event_name == 'published' }}
