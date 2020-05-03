@@ -142,7 +142,7 @@ npm run prettier:check
 
 ### License
 
-Released under the [MIT](https://github.com/wombak/scroller-motion/blob/master/LICENSE.md) License.<br>
+Released under the [MIT](https://github.com/wombak/scroller-motion/blob/master/LICENSE) License.<br>
 Authored and maintained by Wombak with help from [contributors](https://github.com/wombak/scroller-motion/contributors).
 
 > [wombak.xyz](https://wombak.xyz) · GitHub [@wombak](https://github.com/wombak) · Twitter [@wombak_xyz](https://twitter.com/wombak_xyz)
