@@ -1,13 +1,26 @@
 import { DetailedHTMLProps, HTMLAttributes, MutableRefObject } from 'react'
+import { SpringProps as SpringConfig } from 'popmotion'
+import { MotionValue } from 'framer-motion'
 
-export { MotionValue } from 'framer-motion'
-export type { SpringProps as SpringProp } from 'popmotion'
+type ChildrenRef = MutableRefObject<HTMLDivElement | null>
 
-export type ChildrenRef = MutableRefObject<HTMLDivElement | null>
-
-export type ScaleProp = number
-
-export type DivElementProps = DetailedHTMLProps<
+type DivElementProps = DetailedHTMLProps<
   HTMLAttributes<HTMLDivElement>,
   HTMLDivElement
 >
+
+type OnUpdateProp = (payload: { scrollY: MotionValue; y: MotionValue }) => void
+
+type ScaleProp = number
+
+type SpringProp = SpringConfig | null | false
+
+export type {
+  ChildrenRef,
+  DivElementProps,
+  MotionValue,
+  OnUpdateProp,
+  ScaleProp,
+  SpringConfig,
+  SpringProp
+}

@@ -1,22 +1,32 @@
-import { useMemo } from 'react'
+import { useEffect, useMemo } from 'react'
 import { useTransform } from 'framer-motion'
 
-import { ChildrenRef, MotionValue, SpringProp } from '@/types'
+import { ChildrenRef, MotionValue, OnUpdateProp, SpringProp } from '@/types'
 
 import useHeight from './useHeight'
 import useSpringScroll from './useSpringScroll'
 import useWindowHeight from './useWindowHeight'
 
-type UseScrollMotion = (
-  ref: ChildrenRef,
-  scale: number,
+type UseScrollMotion = (options: {
+  onUpdate?: OnUpdateProp
+  ref: ChildrenRef
+  scale: number
   spring: SpringProp
-) => { y: MotionValue; height: number }
+}) => { y: MotionValue; height: number }
 
-export const useScrollerMotion: UseScrollMotion = (ref, scale, spring) => {
+export const useScrollerMotion: UseScrollMotion = ({
+  onUpdate,
+  ref,
+  scale,
+  spring
+}) => {
   const windowHeight = useWindowHeight()
   const refHeight = useHeight(ref)
-  const scaledHeight = useMemo(() => refHeight * scale, [refHeight, scale])
+  const innerScale = useMemo(() => Math.max(1, scale), [scale])
+  const scaledHeight = useMemo(() => refHeight * innerScale, [
+    innerScale,
+    refHeight
+  ])
 
   const springScroll = useSpringScroll(spring)
 
@@ -29,7 +39,26 @@ export const useScrollerMotion: UseScrollMotion = (ref, scale, spring) => {
     windowHeight
   ])
 
-  const y = useTransform(springScroll, yTransformFrom, yTransformTo)
+  const y = useTransform(springScroll, yTransformFrom, yTransformTo, {
+    clamp: false
+  })
+
+  useEffect(() => {
+    if (typeof onUpdate === 'function') {
+      const onSpringChange = () => {
+        onUpdate({
+          scrollY: springScroll,
+          y
+        })
+      }
+
+      const unsubListener = springScroll.onChange(onSpringChange)
+
+      return () => {
+        unsubListener()
+      }
+    }
+  }, [onUpdate, springScroll, y])
 
   return { y, height: scaledHeight }
 }
