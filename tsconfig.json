@@ -16,6 +16,5 @@
     "isolatedModules": true,
     "jsx": "react"
   },
-  "exclude": ["node_modules", "stories"],
-  "include": ["types/*.d.ts"]
+  "exclude": ["node_modules", "stories"]
 }
