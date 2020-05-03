@@ -1,7 +1,7 @@
 {
   "name": "scroller-motion",
   "version": "0.0.1-beta.2",
-  "description": "Elegant smooth scrolling for React apps through framer-motion",
+  "description": "🛹 Elegant motion scrolling for React",
   "source": "src/index.ts",
   "main": "dist/index.js",
   "module": "dist/index.modern.js",
@@ -35,7 +35,7 @@
   },
   "peerDependencies": {
     "framer-motion": "^1.10",
-    "react": "^16"
+    "react": "^16.8"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",
@@ -74,7 +74,6 @@
     "spring",
     "scroll",
     "framer",
-    "framer-motion",
     "parallax",
     "smooth"
   ],
