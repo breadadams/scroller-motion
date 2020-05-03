@@ -38,7 +38,7 @@ const useResizeListeners: UseResizeListeners = (ref, onResize) => {
         }
       }
     }
-  }, [ref.current, onResize])
+  }, [ref, onResize])
 }
 
 type UseHeight = (ref: ChildrenRef) => number
@@ -50,7 +50,7 @@ const useHeight: UseHeight = (ref) => {
     if (ref.current) {
       setHeight(getHeight(ref.current))
     }
-  }, [ref.current])
+  }, [ref])
 
   useResizeListeners(ref, updateHeight)
 
