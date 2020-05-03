@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useLayoutEffect, useState } from 'react'
 import actual from 'actual'
 
 const useWindowHeight = (): number => {
@@ -6,7 +6,7 @@ const useWindowHeight = (): number => {
 
   const onResize = useCallback(() => setHeight(actual('height', 'px')), [])
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     onResize()
 
     window.addEventListener('resize', onResize, false)
