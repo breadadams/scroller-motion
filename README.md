@@ -68,7 +68,9 @@ default: `false`
 
 Completly disables and unmounts the `ScrollerMotion` component. Any children will be rendered through a React `<Fragment>` in this case (thus falling back to native scrolling).
 
-#### `onUpdate` [Demo](https://scroller-motion.wombak.xyz/?path=/story/scrollermotion--with-listener)
+#### `onUpdate`
+
+[**View demo**](https://scroller-motion.wombak.xyz/?path=/story/scrollermotion--with-listener)
 
 type: `({ scrollY: MotionValue, y: MotionValue }) => void` <br/>
 default: `undefined`
@@ -80,7 +82,9 @@ A callback event attached internally to the scroll's MotionValue. It fires perio
 
 For accessing the _native_ scroll value (without any spring motion) we suggest using framer-motion's [`useViewportScroll`](https://www.framer.com/api/motion/motionvalue/#useviewportscroll).
 
-#### `scale` [Demo](https://scroller-motion.wombak.xyz/?path=/story/scrollermotion--custom-scale)
+#### `scale`
+
+[**View demo**](https://scroller-motion.wombak.xyz/?path=/story/scrollermotion--custom-scale)
 
 type: `number` <br/>
 default: `1`
@@ -89,7 +93,9 @@ Extends the scrollable length of the page, giving a "slow scroll" experience. Fo
 
 The lowest this value can be is `1`, anything lower will be disregarded and `1` will be used in its place.
 
-#### `spring` [Demo](https://scroller-motion.wombak.xyz/?path=/story/scrollermotion--custom-spring)
+#### `spring`
+
+[**View demo**](https://scroller-motion.wombak.xyz/?path=/story/scrollermotion--custom-spring)
 
 type: [`SpringProps`](https://github.com/Popmotion/popmotion/blob/ec4974a19789c3cebc4e14e1fde3b55cdeecf7b0/packages/popmotion/src/animations/spring/types.ts#L1) <br/>
 default: `{ mass: 1.25, stiffness: 200, damping: 50 }`
