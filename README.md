@@ -12,11 +12,11 @@
   </a>
 </p>
 
-<h4 align="center">A library built upon <a href="https://github.com/framer/motion" target="_blank">framer-motion</a>, bringing motion scrolling to React.</h4>
+<h4 align="center">A library built upon <a href="https://github.com/framer/motion" target="_blank">framer-motion</a>, bringing motion scrolling to React</h4>
 
 ---
 
-1. [Installing](#installing)
+1. [Installation](#installation)
 1. [Usage](#usage)
 1. [API](#api)
 1. [About](#about)
@@ -25,9 +25,9 @@
 
 ---
 
-### Installing
+### Installation
 
-To get started you'll want to install **scroller-motion** as well as the peer dependencies:
+To begin you'll want to install **scroller-motion** as well as the peer dependencies:
 
 ```bash
 npm install scroller-motion@beta framer-motion react
@@ -71,8 +71,9 @@ Completly disables and unmounts the `ScrollerMotion` component. Any children wil
 #### `onUpdate`
 
 type: `({ scrollY: MotionValue, y: MotionValue }) => void` <br/>
-default: `undefined`<br/>
-[**View example**](https://scroller-motion.wombak.xyz/?path=/story/scrollermotion--with-listener)
+default: `undefined`
+
+[**View demo**](https://scroller-motion.wombak.xyz/?path=/story/scrollermotion--with-listener)
 
 A callback event attached internally to the scroll's MotionValue. It fires periodically when the MotionValue updates, the object contains:
 
@@ -84,8 +85,9 @@ For accessing the _native_ scroll value (without any spring motion) we suggest u
 #### `scale`
 
 type: `number` <br/>
-default: `1` <br/>
-[**View example**](https://scroller-motion.wombak.xyz/?path=/story/scrollermotion--custom-scale)
+default: `1`
+
+[**View demo**](https://scroller-motion.wombak.xyz/?path=/story/scrollermotion--custom-scale)
 
 Extends the scrollable length of the page, giving a "slow scroll" experience. For example if the page content is **1400px** in height, `<ScrollerMotion scale={1.5} />` would result in a scrollable length of **2100px** (`height * scale`).
 
@@ -94,8 +96,9 @@ The lowest this value can be is `1`, anything lower will be disregarded and `1` 
 #### `spring`
 
 type: [`SpringProps`](https://github.com/Popmotion/popmotion/blob/ec4974a19789c3cebc4e14e1fde3b55cdeecf7b0/packages/popmotion/src/animations/spring/types.ts#L1) <br/>
-default: `{ mass: 1.25, stiffness: 200, damping: 50 }`<br/>
-[**View example**](https://scroller-motion.wombak.xyz/?path=/story/scrollermotion--custom-spring)
+default: `{ mass: 1.25, stiffness: 200, damping: 50 }`
+
+[**View demo**](https://scroller-motion.wombak.xyz/?path=/story/scrollermotion--custom-spring)
 
 The main configuration object for the scroll's spring transform, basically the 2nd parameter to framer-motion's [useSpring](https://www.framer.com/api/motion/types/#spring).
 
