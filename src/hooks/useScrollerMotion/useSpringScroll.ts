@@ -1,4 +1,3 @@
-import { useMemo } from 'react'
 import { useSpring, useViewportScroll } from 'framer-motion'
 
 import { MotionValue, SpringProp, SpringConfig } from '@/types'
@@ -6,18 +5,10 @@ import { MotionValue, SpringProp, SpringConfig } from '@/types'
 const useSpringScroll = (springConfig: SpringProp): MotionValue => {
   const { scrollY } = useViewportScroll()
 
-  const enableSpring = useMemo(() => typeof springConfig === 'object', [
-    springConfig
-  ])
+  const config = typeof springConfig === 'object' ? springConfig : undefined
+  const spring = useSpring(scrollY, config as SpringConfig | undefined)
 
-  const config = useMemo(
-    () => (enableSpring ? (springConfig as SpringConfig) : undefined),
-    [enableSpring, springConfig]
-  )
-
-  const springScroll = useSpring(scrollY, config)
-
-  return enableSpring ? springScroll : scrollY
+  return config ? spring : scrollY
 }
 
 export default useSpringScroll
