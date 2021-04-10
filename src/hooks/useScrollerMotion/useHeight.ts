@@ -13,9 +13,7 @@ type UseResizeListeners = (ref: ChildrenRef, onResize: () => void) => void
 
 const useResizeListeners: UseResizeListeners = (ref, onResize) => {
   useLayoutEffect(() => {
-    const { current: el } = ref
-
-    if (el) {
+    if (ref.current) {
       onResize()
 
       const supportsResizeObserver = typeof ResizeObserver === 'function'
@@ -27,7 +25,7 @@ const useResizeListeners: UseResizeListeners = (ref, onResize) => {
 
       if (supportsResizeObserver) {
         resizeObserver = new ResizeObserver(onResize)
-        resizeObserver.observe(el)
+        resizeObserver.observe(ref.current)
       }
 
       return () => {
@@ -38,7 +36,7 @@ const useResizeListeners: UseResizeListeners = (ref, onResize) => {
         }
       }
     }
-  }, [ref, onResize])
+  }, [onResize])
 }
 
 type UseHeight = (ref: ChildrenRef) => number
@@ -50,7 +48,7 @@ const useHeight: UseHeight = (ref) => {
     if (ref.current) {
       setHeight(getHeight(ref.current))
     }
-  }, [ref])
+  }, [])
 
   useResizeListeners(ref, updateHeight)
 

@@ -12,7 +12,7 @@ type UseScrollMotion = (options: {
   ref: ChildrenRef
   scale: number
   spring: SpringProp
-}) => { y: MotionValue; height: number }
+}) => { height: number; y: MotionValue }
 
 export const useScrollerMotion: UseScrollMotion = ({
   onUpdate,
@@ -44,21 +44,24 @@ export const useScrollerMotion: UseScrollMotion = ({
   })
 
   useEffect(() => {
+    let unsubscribe: (() => void) | undefined
+
     if (typeof onUpdate === 'function') {
-      const onSpringChange = () => {
+      const onSpringChange = () =>
         onUpdate({
           scrollY: springScroll,
           y
         })
-      }
 
-      const unsubListener = springScroll.onChange(onSpringChange)
+      unsubscribe = springScroll.onChange(onSpringChange)
+    }
 
-      return () => {
-        unsubListener()
+    return () => {
+      if (unsubscribe) {
+        unsubscribe()
       }
     }
   }, [onUpdate, springScroll, y])
 
-  return { y, height: scaledHeight }
+  return { height: scaledHeight, y }
 }
