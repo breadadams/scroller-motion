@@ -6,6 +6,7 @@ import { DivElementProps, OnUpdateProp, ScaleProp, SpringProp } from '@/types'
 import Wrap from './Wrap'
 
 export interface CoreProps extends DivElementProps {
+  disabled?: boolean
   onUpdate?: OnUpdateProp
   scale?: ScaleProp
   spring?: SpringProp
@@ -14,17 +15,18 @@ export interface CoreProps extends DivElementProps {
 const DEFAULT_SCALE = 1
 
 const DEFAULT_SPRING = {
+  damping: 50,
   mass: 1.25,
-  stiffness: 200,
-  damping: 50
+  stiffness: 200
 }
 
 const Core: React.FC<CoreProps> = ({
   children,
+  disabled,
   onUpdate,
   scale = DEFAULT_SCALE,
   spring = DEFAULT_SPRING,
-  ...p
+  ...props
 }) => {
   const childrenRef = useRef(null)
   const { height, y } = useScrollerMotion({
@@ -34,14 +36,17 @@ const Core: React.FC<CoreProps> = ({
     spring
   })
 
-  const props = {
-    ...p,
-    childrenRef,
-    height,
-    y
-  }
-
-  return <Wrap {...props}>{children}</Wrap>
+  return (
+    <Wrap
+      {...props}
+      childrenRef={childrenRef}
+      disabled={disabled}
+      height={height}
+      y={y}
+    >
+      {children}
+    </Wrap>
+  )
 }
 
 export default Core
