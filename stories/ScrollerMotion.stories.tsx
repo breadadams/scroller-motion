@@ -1,26 +1,21 @@
-import React, { useCallback, useState } from 'react'
-import { useMotionValue, MotionValue } from 'framer-motion'
+import React, { useState } from 'react'
+import { useMotionValue } from 'framer-motion'
 
 import ScrollerMotion from '../src'
-import { OnUpdateProp } from '../src/types'
 
 import { ColorBlocks, CornerControls, Intro, ScrollMarker } from './parts'
-
-const useYListener = (): [MotionValue, OnUpdateProp] => {
-  const innerY = useMotionValue(0)
-
-  const onUpdate = useCallback(
-    ({ y }) => window.requestAnimationFrame(() => innerY.set(y.get() * -1)),
-    [innerY]
-  )
-
-  return [innerY, onUpdate]
-}
 
 export default {
   title: 'ScrollerMotion',
   component: ScrollerMotion
 }
+
+const CONTENTS_DISPLAY_NAME = 'StoryContents'
+const STORY_PARAMETERS = {
+  jsx: { filterProps: ['isEnabled', 'onToggleEnable'] }
+}
+
+/* Default Story */
 
 const DefaultStoryContents = () => (
   <>
@@ -33,35 +28,27 @@ const DefaultStoryContents = () => (
     <ColorBlocks />
   </>
 )
-DefaultStoryContents.displayName = 'StoryContents'
+DefaultStoryContents.displayName = CONTENTS_DISPLAY_NAME
 
 export const DefaultStory = (): JSX.Element => {
   const [enabled, setEnabled] = useState(true)
-  const [y, onUpdate] = useYListener()
 
   return (
-    <ScrollerMotion disabled={!enabled} onUpdate={onUpdate}>
-      <DefaultStoryContents />
+    <>
+      <ScrollerMotion disabled={!enabled}>
+        <DefaultStoryContents />
+      </ScrollerMotion>
 
       <CornerControls
         isEnabled={enabled}
-        onToggleEnable={() => {
-          setEnabled(!enabled)
-        }}
-        yPos={y}
+        onToggleEnable={() => setEnabled((e) => !e)}
       />
-    </ScrollerMotion>
+    </>
   )
 }
-DefaultStory.story = {
-  name: 'Default',
-  parameters: {
-    jsx: {
-      filterProps: ['isEnabled', 'onToggleEnable', 'onUpdate', 'yPos'],
-      showFunctions: false
-    }
-  }
-}
+DefaultStory.story = { name: 'Default', parameters: STORY_PARAMETERS }
+
+/* `scale` Story */
 
 const ScaleStoryContents = () => (
   <>
@@ -78,34 +65,27 @@ const ScaleStoryContents = () => (
     <ColorBlocks />
   </>
 )
-ScaleStoryContents.displayName = 'StoryContents'
+ScaleStoryContents.displayName = CONTENTS_DISPLAY_NAME
 
 export const CustomScale = (): JSX.Element => {
   const [enabled, setEnabled] = useState(true)
-  const [y, onUpdate] = useYListener()
 
   return (
-    <ScrollerMotion disabled={!enabled} onUpdate={onUpdate} scale={1.5}>
-      <ScaleStoryContents />
+    <>
+      <ScrollerMotion disabled={!enabled} scale={1.5}>
+        <ScaleStoryContents />
+      </ScrollerMotion>
 
       <CornerControls
         isEnabled={enabled}
-        onToggleEnable={() => {
-          setEnabled(!enabled)
-        }}
-        yPos={y}
+        onToggleEnable={() => setEnabled(!enabled)}
       />
-    </ScrollerMotion>
+    </>
   )
 }
-CustomScale.story = {
-  parameters: {
-    jsx: {
-      filterProps: ['isEnabled', 'onToggleEnable', 'onUpdate', 'yPos'],
-      showFunctions: false
-    }
-  }
-}
+CustomScale.story = { parameters: STORY_PARAMETERS }
+
+/* `spring` Story */
 
 const CustomSpringContents = () => (
   <>
@@ -122,43 +102,35 @@ const CustomSpringContents = () => (
     <ColorBlocks />
   </>
 )
-CustomSpringContents.displayName = 'StoryContents'
+CustomSpringContents.displayName = CONTENTS_DISPLAY_NAME
+
+const CUSTOM_SPRING = {
+  damping: 50,
+  mass: 10,
+  stiffness: 100
+}
 
 export const CustomSpring = (): JSX.Element => {
   const [enabled, setEnabled] = useState(true)
-  const [y, onUpdate] = useYListener()
 
   return (
-    <ScrollerMotion
-      disabled={!enabled}
-      onUpdate={onUpdate}
-      spring={{
-        mass: 2,
-        stiffness: 50,
-        damping: 200
-      }}
-    >
-      <CustomSpringContents />
+    <>
+      <ScrollerMotion disabled={!enabled} spring={CUSTOM_SPRING}>
+        <CustomSpringContents />
+      </ScrollerMotion>
+
       <CornerControls
         isEnabled={enabled}
-        onToggleEnable={() => {
-          setEnabled(!enabled)
-        }}
-        yPos={y}
+        onToggleEnable={() => setEnabled(!enabled)}
       />
-    </ScrollerMotion>
+    </>
   )
 }
-CustomSpring.story = {
-  parameters: {
-    jsx: {
-      filterProps: ['isEnabled', 'onToggleEnable', 'onUpdate', 'yPos'],
-      showFunctions: false
-    }
-  }
-}
+CustomSpring.story = { parameters: STORY_PARAMETERS }
 
-const WithListenerContents: React.FC = () => (
+/* `onUpdate` Story */
+
+const WithOnUpdateContents: React.FC = () => (
   <>
     <Intro>
       The <code>onUpdate</code> props allows you to access the inner{' '}
@@ -167,10 +139,9 @@ const WithListenerContents: React.FC = () => (
     <ColorBlocks />
   </>
 )
+WithOnUpdateContents.displayName = CONTENTS_DISPLAY_NAME
 
-WithListenerContents.displayName = 'StoryContents'
-
-export const WithListener = (): JSX.Element => {
+export const WithOnUpdate = (): JSX.Element => {
   const [enabled, setEnabled] = useState(true)
   const scrollY = useMotionValue(0)
   const y = useMotionValue(0)
@@ -182,25 +153,20 @@ export const WithListener = (): JSX.Element => {
     })
 
   return (
-    <ScrollerMotion disabled={!enabled} onUpdate={onUpdate}>
-      <WithListenerContents />
+    <>
+      <ScrollerMotion disabled={!enabled} onUpdate={onUpdate}>
+        <WithOnUpdateContents />
 
-      {enabled && <ScrollMarker scrollY={scrollY} y={y} />}
+        {enabled && <ScrollMarker scrollY={scrollY} y={y} />}
+      </ScrollerMotion>
 
       <CornerControls
         isEnabled={enabled}
-        onToggleEnable={() => {
-          setEnabled(!enabled)
-        }}
-        yPos={scrollY}
+        onToggleEnable={() => setEnabled(!enabled)}
       />
-    </ScrollerMotion>
+    </>
   )
 }
-WithListener.story = {
-  parameters: {
-    jsx: {
-      filterProps: ['isEnabled', 'onToggleEnable', 'yPos']
-    }
-  }
+WithOnUpdate.story = {
+  parameters: { jsx: { ...STORY_PARAMETERS.jsx, showFunctions: false } }
 }

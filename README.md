@@ -12,7 +12,7 @@
   </a>
 </p>
 
-<h4 align="center">A library built upon <a href="https://github.com/framer/motion" target="_blank">framer-motion</a>, bringing motion scrolling to React</h4>
+<h4 align="center">Bringing motion scrolling to React, built upon <a href="https://github.com/framer/motion" target="_blank">framer-motion</a></h4>
 
 ---
 
@@ -50,9 +50,7 @@ import ScrollerMotion from 'scroller-motion'
 
 export default () => (
   <ScrollerMotion>
-    <main style={{ height: '200vh' }}>
-      <h1>Hello world!</h1>
-    </main>
+    <MyPageContents />
   </ScrollerMotion>
 )
 ```
@@ -95,7 +93,7 @@ The lowest this value can be is `1`, anything lower will be disregarded and `1` 
 
 #### `spring`
 
-type: [`SpringProps`](https://github.com/Popmotion/popmotion/blob/ec4974a19789c3cebc4e14e1fde3b55cdeecf7b0/packages/popmotion/src/animations/spring/types.ts#L1) <br/>
+type: [`SpringOptions`](https://github.com/Popmotion/popmotion/blob/ec4974a19789c3cebc4e14e1fde3b55cdeecf7b0/packages/popmotion/src/animations/spring/types.ts#L1) <br/>
 default: `{ mass: 1.25, stiffness: 200, damping: 50 }`
 
 [**View demo**](https://scroller-motion.wombak.xyz/?path=/story/scrollermotion--custom-spring)
@@ -114,7 +112,7 @@ You can disable the spring scroll by passing a falsy value to this prop, for exa
 - ⚙️ SSR compatible
 - 🤖 Fully typed w/ TypeScript
 - 🎣 Built around React hooks
-- ⚖️ Only ~2kb gzipped
+- ⚖️ Only 2.2kb gzipped
 
 It's still a `@beta` release, with a public roadmap for the stable v1 available [here](https://github.com/wombak/scroller-motion/projects/1).
 

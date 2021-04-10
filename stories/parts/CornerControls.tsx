@@ -1,8 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
-import { motion, MotionValue } from 'framer-motion'
 
-const CornerButtons = styled(motion.div)`
+const CornerButtons = styled.div`
   position: fixed;
   top: 40px;
   right: 40px;
@@ -31,27 +30,22 @@ const CornerButton = styled.button`
 export const CornerControls: React.FC<{
   isEnabled: boolean
   onToggleEnable: () => void
-  yPos?: MotionValue
-}> = ({ isEnabled, onToggleEnable, yPos }) => {
-  const styles = isEnabled ? { y: yPos } : {}
-
-  return (
-    <CornerButtons style={styles}>
-      <CornerButton onClick={onToggleEnable}>
-        {isEnabled ? '🚫 Disable' : '✅ Enable'}
-      </CornerButton>
-      <CornerButton
-        onClick={() => {
-          window.scrollBy({
-            top: 250,
-            behavior: 'smooth'
-          })
-        }}
-      >
-        👇 Scroll Down
-      </CornerButton>
-    </CornerButtons>
-  )
-}
+}> = ({ isEnabled, onToggleEnable }) => (
+  <CornerButtons>
+    <CornerButton onClick={onToggleEnable}>
+      {isEnabled ? '🚫 Disable' : '✅ Enable'}
+    </CornerButton>
+    <CornerButton
+      onClick={() =>
+        window.scrollBy({
+          top: 250,
+          behavior: 'smooth'
+        })
+      }
+    >
+      👇 Scroll Down
+    </CornerButton>
+  </CornerButtons>
+)
 
 CornerControls.displayName = 'Controls'
