@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useMemo } from 'react'
 import styled, { css } from 'styled-components'
 import LinkTo from '@storybook/addon-links/react'
 
@@ -24,6 +24,11 @@ const IntroTitle = styled.h1`
   text-align: center;
   font-size: 46px;
   margin: 0 0 20px;
+`
+
+const Badges = styled.div`
+  text-align: center;
+  margin-bottom: 20px;
 `
 
 const StoryNav = styled.nav`
@@ -52,7 +57,7 @@ const NavItem = styled.li`
 `
 
 // @ts-ignore
-const StoryLink = styled(LinkTo)`
+const StoryLink = styled(({ isActive, ...props }) => <LinkTo {...props} />)`
   font-weight: 600;
 
   ${({ isActive = false }) =>
@@ -90,17 +95,14 @@ const IntroBody = styled.p`
 
 const storyLinks = [
   { label: 'Default', path: 'default-story' },
-  { label: 'Slow Scroll', path: 'custom-scale' },
-  { label: 'Custom Spring', path: 'custom-spring' },
-  { label: 'onUpdate Listener', path: 'with-on-update' }
+  { label: 'Slow Scroll', path: 'scale' },
+  { label: 'Custom Spring', path: 'spring' },
+  { label: 'onUpdate Listener', path: 'on-update' }
 ]
 
 const IntroLink: React.FC<{ path: string }> = ({ children, path }) => {
-  const [isActive, setIsActive] = useState(false)
+  const isActive = useMemo(() => window.location.href.includes(path), [path])
 
-  useEffect(() => {
-    setIsActive(window.location.href.includes(path))
-  }, [path])
   return (
     <NavItem>
       <StoryLink isActive={isActive} story={path}>
@@ -114,6 +116,25 @@ export const Intro: React.FC = ({ children }) => (
   <IntroWrap>
     <EmojiWrap>🛹</EmojiWrap>
     <IntroTitle>scroller-motion</IntroTitle>
+
+    <Badges>
+      <a
+        href="https://www.npmjs.com/package/scroller-motion/v/beta"
+        target="_blank"
+      >
+        <img
+          src="https://img.shields.io/npm/v/scroller-motion/beta?style=flat-square"
+          alt="NPM Package Version"
+        />
+      </a>
+      &nbsp;
+      <a href="https://github.com/wombak/scroller-motion" target="_blank">
+        <img
+          src="https://img.shields.io/github/stars/wombak/scroller-motion?style=social"
+          alt="Scroller-motion Repo stars"
+        />
+      </a>
+    </Badges>
 
     <StoryNav>
       <NavList>

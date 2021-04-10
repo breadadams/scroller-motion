@@ -17,18 +17,18 @@ const STORY_PARAMETERS = {
 
 /* Default Story */
 
-const DefaultStoryContents = () => (
+const DefaultContents = () => (
   <>
     <Intro>
       The default appearance of <code>&lt;ScrollerMotion /&gt;</code>.<br />
       <br /> Try scrolling through this list of colors, you can click on each
-      block to toggle it's height.
+      block to toggle its height.
     </Intro>
 
     <ColorBlocks />
   </>
 )
-DefaultStoryContents.displayName = CONTENTS_DISPLAY_NAME
+DefaultContents.displayName = CONTENTS_DISPLAY_NAME
 
 export const DefaultStory = (): JSX.Element => {
   const [enabled, setEnabled] = useState(true)
@@ -36,7 +36,7 @@ export const DefaultStory = (): JSX.Element => {
   return (
     <>
       <ScrollerMotion disabled={!enabled}>
-        <DefaultStoryContents />
+        <DefaultContents />
       </ScrollerMotion>
 
       <CornerControls
@@ -46,11 +46,12 @@ export const DefaultStory = (): JSX.Element => {
     </>
   )
 }
-DefaultStory.story = { name: 'Default', parameters: STORY_PARAMETERS }
+DefaultStory.storyName = 'Default'
+DefaultStory.parameters = STORY_PARAMETERS
 
 /* `scale` Story */
 
-const ScaleStoryContents = () => (
+const ScaleContents = () => (
   <>
     <Intro>
       Custom <code>scale</code> prop.
@@ -65,15 +66,15 @@ const ScaleStoryContents = () => (
     <ColorBlocks />
   </>
 )
-ScaleStoryContents.displayName = CONTENTS_DISPLAY_NAME
+ScaleContents.displayName = CONTENTS_DISPLAY_NAME
 
-export const CustomScale = (): JSX.Element => {
+export const Scale = (): JSX.Element => {
   const [enabled, setEnabled] = useState(true)
 
   return (
     <>
       <ScrollerMotion disabled={!enabled} scale={1.5}>
-        <ScaleStoryContents />
+        <ScaleContents />
       </ScrollerMotion>
 
       <CornerControls
@@ -83,11 +84,11 @@ export const CustomScale = (): JSX.Element => {
     </>
   )
 }
-CustomScale.story = { parameters: STORY_PARAMETERS }
+Scale.parameters = STORY_PARAMETERS
 
 /* `spring` Story */
 
-const CustomSpringContents = () => (
+const SpringContents = () => (
   <>
     <Intro>
       Custom <code>spring</code> prop.
@@ -102,7 +103,7 @@ const CustomSpringContents = () => (
     <ColorBlocks />
   </>
 )
-CustomSpringContents.displayName = CONTENTS_DISPLAY_NAME
+SpringContents.displayName = CONTENTS_DISPLAY_NAME
 
 const CUSTOM_SPRING = {
   damping: 50,
@@ -110,13 +111,13 @@ const CUSTOM_SPRING = {
   stiffness: 100
 }
 
-export const CustomSpring = (): JSX.Element => {
+export const Spring = (): JSX.Element => {
   const [enabled, setEnabled] = useState(true)
 
   return (
     <>
       <ScrollerMotion disabled={!enabled} spring={CUSTOM_SPRING}>
-        <CustomSpringContents />
+        <SpringContents />
       </ScrollerMotion>
 
       <CornerControls
@@ -126,11 +127,11 @@ export const CustomSpring = (): JSX.Element => {
     </>
   )
 }
-CustomSpring.story = { parameters: STORY_PARAMETERS }
+Spring.parameters = STORY_PARAMETERS
 
 /* `onUpdate` Story */
 
-const WithOnUpdateContents: React.FC = () => (
+const OnUpdateContents: React.FC = () => (
   <>
     <Intro>
       The <code>onUpdate</code> props allows you to access the inner{' '}
@@ -139,9 +140,9 @@ const WithOnUpdateContents: React.FC = () => (
     <ColorBlocks />
   </>
 )
-WithOnUpdateContents.displayName = CONTENTS_DISPLAY_NAME
+OnUpdateContents.displayName = CONTENTS_DISPLAY_NAME
 
-export const WithOnUpdate = (): JSX.Element => {
+export const OnUpdate = (): JSX.Element => {
   const [enabled, setEnabled] = useState(true)
   const scrollY = useMotionValue(0)
   const y = useMotionValue(0)
@@ -155,7 +156,7 @@ export const WithOnUpdate = (): JSX.Element => {
   return (
     <>
       <ScrollerMotion disabled={!enabled} onUpdate={onUpdate}>
-        <WithOnUpdateContents />
+        <OnUpdateContents />
 
         {enabled && <ScrollMarker scrollY={scrollY} y={y} />}
       </ScrollerMotion>
@@ -167,6 +168,5 @@ export const WithOnUpdate = (): JSX.Element => {
     </>
   )
 }
-WithOnUpdate.story = {
-  parameters: { jsx: { ...STORY_PARAMETERS.jsx, showFunctions: false } }
-}
+OnUpdate.storyName = 'onUpdate'
+OnUpdate.parameters = { ...STORY_PARAMETERS.jsx, showFunctions: false }
