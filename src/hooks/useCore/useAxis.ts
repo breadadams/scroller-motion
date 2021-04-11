@@ -3,14 +3,19 @@ import { useTransform } from 'framer-motion'
 
 import { MotionValue } from '@/types'
 
-interface Params {
+interface Options {
   axisSpring: MotionValue
   scale: number
   refSize: number
   windowSize: number
 }
 
-export const useAxis = ({ axisSpring, scale, refSize, windowSize }: Params) => {
+export const useAxis = ({
+  axisSpring,
+  scale,
+  refSize,
+  windowSize
+}: Options) => {
   const scaledSize = useMemo(() => refSize * scale, [refSize, scale])
 
   const transformFrom = useMemo(() => [0, scaledSize - windowSize], [

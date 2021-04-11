@@ -1,6 +1,6 @@
 import React, { useRef } from 'react'
 
-import { useScrollerMotion } from '@/hooks'
+import { useCore } from '@/hooks'
 import { DivElementProps, OnUpdateProp, ScaleProp, SpringProp } from '@/types'
 
 import Wrap from './Wrap'
@@ -29,7 +29,7 @@ const Core: React.FC<CoreProps> = ({
   ...props
 }) => {
   const childrenRef = useRef(null)
-  const { height, width, x, y } = useScrollerMotion({
+  const { height, width, x, y } = useCore({
     onUpdate,
     ref: childrenRef,
     scale,

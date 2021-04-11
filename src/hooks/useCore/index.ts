@@ -7,19 +7,14 @@ import { useSize } from './useSize'
 import { useSpringScroll } from './useSpringScroll'
 import { useWindowSize } from './useWindowSize'
 
-type UseScrollMotion = (options: {
+interface Options {
   onUpdate?: OnUpdateProp
   ref: ChildrenRef
   scale: number
   spring: SpringProp
-}) => { height: number; width: number; x: MotionValue; y: MotionValue }
+}
 
-export const useScrollerMotion: UseScrollMotion = ({
-  onUpdate,
-  ref,
-  scale,
-  spring
-}) => {
+export const useCore = ({ onUpdate, ref, scale, spring }: Options) => {
   const { height: windowHeight, width: windowWidth } = useWindowSize()
   const { height: refHeight, width: refWidth } = useSize(ref)
   const innerScale = useMemo(() => Math.max(1, scale), [scale])

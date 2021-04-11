@@ -1,1 +1,1 @@
-export { useScrollerMotion } from './useScrollerMotion'
+export { useCore } from './useCore'
