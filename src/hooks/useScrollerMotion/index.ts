@@ -1,18 +1,18 @@
 import { useEffect, useMemo } from 'react'
-import { useTransform } from 'framer-motion'
 
 import { ChildrenRef, MotionValue, OnUpdateProp, SpringProp } from '@/types'
 
-import useHeight from './useHeight'
-import useSpringScroll from './useSpringScroll'
-import useWindowHeight from './useWindowHeight'
+import { useAxis } from './useAxis'
+import { useSize } from './useSize'
+import { useSpringScroll } from './useSpringScroll'
+import { useWindowSize } from './useWindowSize'
 
 type UseScrollMotion = (options: {
   onUpdate?: OnUpdateProp
   ref: ChildrenRef
   scale: number
   spring: SpringProp
-}) => { height: number; y: MotionValue }
+}) => { height: number; width: number; x: MotionValue; y: MotionValue }
 
 export const useScrollerMotion: UseScrollMotion = ({
   onUpdate,
@@ -20,48 +20,52 @@ export const useScrollerMotion: UseScrollMotion = ({
   scale,
   spring
 }) => {
-  const windowHeight = useWindowHeight()
-  const refHeight = useHeight(ref)
+  const { height: windowHeight, width: windowWidth } = useWindowSize()
+  const { height: refHeight, width: refWidth } = useSize(ref)
   const innerScale = useMemo(() => Math.max(1, scale), [scale])
-  const scaledHeight = useMemo(() => refHeight * innerScale, [
-    innerScale,
-    refHeight
-  ])
 
-  const springScroll = useSpringScroll(spring)
+  const { x: xSpring, y: ySpring } = useSpringScroll(spring)
 
-  const yTransformFrom = useMemo(() => [0, scaledHeight - windowHeight], [
-    scaledHeight,
-    windowHeight
-  ])
-  const yTransformTo = useMemo(() => [0, (refHeight - windowHeight) * -1], [
-    refHeight,
-    windowHeight
-  ])
+  const { axis: x, size: width } = useAxis({
+    axisSpring: xSpring,
+    scale: innerScale,
+    refSize: refWidth,
+    windowSize: windowWidth
+  })
 
-  const y = useTransform(springScroll, yTransformFrom, yTransformTo, {
-    clamp: false
+  const { axis: y, size: height } = useAxis({
+    axisSpring: ySpring,
+    scale: innerScale,
+    refSize: refHeight,
+    windowSize: windowHeight
   })
 
   useEffect(() => {
-    let unsubscribe: (() => void) | undefined
+    let unsubscribeX: (() => void) | undefined
+    let unsubscribeY: (() => void) | undefined
 
     if (typeof onUpdate === 'function') {
       const onSpringChange = () =>
         onUpdate({
-          scrollY: springScroll,
+          scrollX: xSpring,
+          scrollY: ySpring,
+          x,
           y
         })
 
-      unsubscribe = springScroll.onChange(onSpringChange)
+      unsubscribeX = xSpring.onChange(onSpringChange)
+      unsubscribeY = ySpring.onChange(onSpringChange)
     }
 
     return () => {
-      if (unsubscribe) {
-        unsubscribe()
+      if (unsubscribeX) {
+        unsubscribeX()
+      }
+      if (unsubscribeY) {
+        unsubscribeY()
       }
     }
-  }, [onUpdate, springScroll, y])
+  }, [onUpdate, x, xSpring, y, ySpring])
 
-  return { height: scaledHeight, y }
+  return { height, width, x, y }
 }

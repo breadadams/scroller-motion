@@ -2,13 +2,17 @@ import { useSpring, useViewportScroll } from 'framer-motion'
 
 import { MotionValue, SpringProp, SpringOptions } from '@/types'
 
-const useSpringScroll = (springConfig: SpringProp): MotionValue => {
-  const { scrollY } = useViewportScroll()
+export const useSpringScroll = (
+  springConfig: SpringProp
+): { x: MotionValue; y: MotionValue } => {
+  const { scrollX, scrollY } = useViewportScroll()
 
   const config = typeof springConfig === 'object' ? springConfig : undefined
-  const spring = useSpring(scrollY, config as SpringOptions)
+  const springX = useSpring(scrollX, config as SpringOptions)
+  const springY = useSpring(scrollY, config as SpringOptions)
 
-  return config ? spring : scrollY
+  return {
+    x: config ? springX : scrollX,
+    y: config ? springY : scrollY
+  }
 }
-
-export default useSpringScroll

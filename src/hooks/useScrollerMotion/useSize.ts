@@ -1,17 +1,14 @@
 import { useCallback, useLayoutEffect, useState } from 'react'
 import debounceFn from 'debounce-fn'
 
-import { ChildrenRef } from '@/types'
+import { ChildrenRef, DOMSize } from '@/types'
 
-const getHeight = (el: HTMLElement): number => {
-  const { height = 0 } = el?.getBoundingClientRect() ?? {}
+const getSize = (el: HTMLElement): DOMSize => ({
+  height: el?.scrollHeight ?? 0,
+  width: el?.scrollWidth ?? 0
+})
 
-  return height
-}
-
-type UseResizeListeners = (ref: ChildrenRef, onResize: () => void) => void
-
-const useResizeListeners: UseResizeListeners = (ref, onResize) => {
+const useResizeListeners = (ref: ChildrenRef, onResize: () => void) => {
   useLayoutEffect(() => {
     if (ref.current) {
       onResize()
@@ -39,20 +36,16 @@ const useResizeListeners: UseResizeListeners = (ref, onResize) => {
   }, [onResize])
 }
 
-type UseHeight = (ref: ChildrenRef) => number
+export const useSize = (ref: ChildrenRef): DOMSize => {
+  const [size, setSize] = useState({ height: 0, width: 0 })
 
-const useHeight: UseHeight = (ref) => {
-  const [height, setHeight] = useState(0)
-
-  const updateHeight = useCallback(() => {
+  const updateSize = useCallback(() => {
     if (ref.current) {
-      setHeight(getHeight(ref.current))
+      setSize(getSize(ref.current))
     }
   }, [])
 
-  useResizeListeners(ref, updateHeight)
+  useResizeListeners(ref, updateSize)
 
-  return height
+  return size
 }
-
-export default useHeight

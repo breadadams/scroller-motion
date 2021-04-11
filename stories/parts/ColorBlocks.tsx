@@ -1,42 +1,85 @@
 import React, { useCallback, useMemo } from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { motion, useCycle, Variants } from 'framer-motion'
 
-const COLOR_VARIANTS: Variants = {
+interface BlocksProps {
+  isVertical?: boolean
+}
+
+interface ColorProps {
+  background: string
+  isVertical?: boolean
+}
+
+const COLOR_HORIZONTAL_VARIANTS: Variants = {
   default: {
-    height: '250px'
+    width: '250px',
+    height: '300px'
   },
   expanded: {
-    height: '500px'
+    width: '500px',
+    height: '300px'
   }
 }
 
-const ColorsWrap = styled.div`
+const COLOR_VERTICAL_VARIANTS: Variants = {
+  default: {
+    height: '250px',
+    width: '100%'
+  },
+  expanded: {
+    height: '500px',
+    width: '100%'
+  }
+}
+
+const ColorsWrap = styled.div<BlocksProps>`
   padding: 0 30px 30px;
-`
+  display: flex;
+  flex-direction: ${({ isVertical }) => (isVertical ? 'column' : 'row')};
 
-const Color = styled(motion.section)`
-  box-shadow: 0 4px 12px rgba(29, 29, 29, 0.175);
-  cursor: pointer;
-  border-radius: 10px;
-
-  &:not(:last-child) {
-    margin-bottom: 30px;
+  &::after {
+    content: '';
+    display: ${({ isVertical }) => (isVertical ? 'none' : 'block')};
+    flex: 0 0 30px;
   }
 `
 
-const ColorSection: React.FC<{ background: string }> = ({ background }) => {
+const Color = styled(motion.section)<ColorProps>`
+  box-shadow: 0 4px 12px rgba(29, 29, 29, 0.175);
+  background: ${({ background }) => background};
+  cursor: pointer;
+  border-radius: 10px;
+  flex: 1 0 auto;
+
+  &:not(:last-child) {
+    ${({ isVertical }) =>
+      isVertical
+        ? css`
+            margin-bottom: 30px;
+          `
+        : css`
+            margin-right: 30px;
+          `};
+  }
+`
+
+const ColorSection: React.FC<ColorProps> = ({ background, isVertical }) => {
   const [variant, cycleVariant] = useCycle('default', 'expanded')
   const onClick = useCallback(() => cycleVariant(), [cycleVariant])
-  const style = useMemo(() => ({ background }), [background])
+  const variants = useMemo(
+    () => (isVertical ? COLOR_VERTICAL_VARIANTS : COLOR_HORIZONTAL_VARIANTS),
+    [isVertical]
+  )
 
   return (
     <Color
-      variants={COLOR_VARIANTS}
-      onClick={onClick}
-      style={style}
-      initial={false}
       animate={variant}
+      background={background}
+      initial={false}
+      isVertical={isVertical}
+      onClick={onClick}
+      variants={variants}
     />
   )
 }
@@ -60,10 +103,10 @@ const bgs: string[] = [
   'pink'
 ]
 
-export const ColorBlocks: React.FC = () => (
-  <ColorsWrap>
+export const ColorBlocks: React.FC<BlocksProps> = ({ isVertical = true }) => (
+  <ColorsWrap isVertical={isVertical}>
     {bgs.map((bg) => (
-      <ColorSection key={bg} background={bg} />
+      <ColorSection key={bg} background={bg} isVertical={isVertical} />
     ))}
   </ColorsWrap>
 )

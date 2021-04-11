@@ -1,11 +1,19 @@
 import React from 'react'
 import styled from 'styled-components'
 
+interface Props {
+  isEnabled: boolean
+  isVertical: boolean
+  onToggleDirection: () => void
+  onToggleEnable: () => void
+}
+
 const CornerButtons = styled.div`
   position: fixed;
   top: 40px;
   right: 40px;
   z-index: 10;
+  backface-visibility: hidden;
 `
 
 const CornerButton = styled.button`
@@ -27,23 +35,37 @@ const CornerButton = styled.button`
   }
 `
 
-export const CornerControls: React.FC<{
-  isEnabled: boolean
-  onToggleEnable: () => void
-}> = ({ isEnabled, onToggleEnable }) => (
+const Emoji = styled.span`
+  font-family: 'Segoe UI Emoji', 'Segoe UI Symbol';
+`
+
+const resetScroll = () => window.scrollTo({ left: 0, top: 0 })
+const scrollDown = () => window.scrollBy({ top: 250, behavior: 'smooth' })
+
+export const CornerControls: React.FC<Props> = ({
+  isEnabled,
+  isVertical,
+  onToggleDirection,
+  onToggleEnable
+}) => (
   <CornerButtons>
-    <CornerButton onClick={onToggleEnable}>
-      {isEnabled ? '🚫 Disable' : '✅ Enable'}
-    </CornerButton>
     <CornerButton
-      onClick={() =>
-        window.scrollBy({
-          top: 250,
-          behavior: 'smooth'
-        })
-      }
+      onClick={() => {
+        onToggleDirection()
+        resetScroll()
+      }}
     >
-      👇 Scroll Down
+      <Emoji>{isVertical ? '↔️' : '↕️'}</Emoji>{' '}
+      {isVertical ? 'Horizontal' : 'Vertical'}
+    </CornerButton>
+
+    <CornerButton onClick={onToggleEnable}>
+      <Emoji>{isEnabled ? '🚫' : '✅'}</Emoji>{' '}
+      {isEnabled ? 'Disable' : 'Enable'}
+    </CornerButton>
+
+    <CornerButton onClick={scrollDown}>
+      <Emoji>👇</Emoji> Scroll Down
     </CornerButton>
   </CornerButtons>
 )

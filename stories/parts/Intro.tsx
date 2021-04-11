@@ -126,8 +126,7 @@ export const Intro: React.FC = ({ children }) => (
           src="https://img.shields.io/npm/v/scroller-motion/beta?style=flat-square"
           alt="NPM Package Version"
         />
-      </a>
-      &nbsp;
+      </a>{' '}
       <a href="https://github.com/wombak/scroller-motion" target="_blank">
         <img
           src="https://img.shields.io/github/stars/wombak/scroller-motion?style=social"

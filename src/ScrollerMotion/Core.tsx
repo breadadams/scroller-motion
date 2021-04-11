@@ -29,7 +29,7 @@ const Core: React.FC<CoreProps> = ({
   ...props
 }) => {
   const childrenRef = useRef(null)
-  const { height, y } = useScrollerMotion({
+  const { height, width, x, y } = useScrollerMotion({
     onUpdate,
     ref: childrenRef,
     scale,
@@ -42,6 +42,8 @@ const Core: React.FC<CoreProps> = ({
       childrenRef={childrenRef}
       disabled={disabled}
       height={height}
+      width={width}
+      x={x}
       y={y}
     >
       {children}

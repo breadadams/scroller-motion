@@ -81,15 +81,15 @@ Completly disables and unmounts the `ScrollerMotion` component. Any children wil
 
 #### `onUpdate`
 
-type: `({ scrollY: MotionValue, y: MotionValue }) => void` <br/>
+type: `({ scrollX: MotionValue, scrollY: MotionValue, x: MotionValue, y: MotionValue }) => void` <br/>
 default: `undefined`
 
 [**View demo**](https://scroller-motion.wombak.xyz/?path=/story/scrollermotion--with-listener)
 
 A callback event attached internally to the scroll's MotionValue. It fires periodically when the MotionValue updates, the object contains:
 
-- `scrollY`: A `MotionValue` of the current (spring) scroll position.
-- `y`: A `MotionValue` of the current transform (useful for calculating the scroll position when `scale` is in-use).
+- `scrollX` & `scrollY`: `MotionValue` of the current (spring) scroll position.
+- `x` & `y`: `MotionValue` of the current transform (useful for calculating the scroll position when `scale` is in-use).
 
 For accessing the _native_ scroll value (without any spring motion) we suggest using framer-motion's [`useViewportScroll`](https://www.framer.com/api/motion/motionvalue/#useviewportscroll).
 
