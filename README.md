@@ -44,7 +44,7 @@ yarn add scroller-motion@beta framer-motion react
 Implementing **scroller-motion** couldn't be easier, simply wrap your page with the `<ScrollerMotion>` component. For example in a [Next.js](https://nextjs.org/) app this might look like the following:
 
 ```jsx
-// pages/index.jsx
+/* pages/index.jsx */
 
 import ScrollerMotion from 'scroller-motion'
 
@@ -53,6 +53,19 @@ export default () => (
     <MyPageContents />
   </ScrollerMotion>
 )
+```
+
+Most modern browsers implement an inertia bounce effect to the window while scrolling (upon reaching the start/end). This can cause unwanted visual effects, such as [flickering](https://github.com/wombak/scroller-motion/issues/7), when using **scroller-motion**.
+
+To fix this, you can disable [`overscroll-behavior`](https://developer.mozilla.org/en-US/docs/Web/CSS/overscroll-behavior) in your project with the following CSS:
+
+```css
+/* style.css */
+
+html,
+body {
+  overscroll-behavior: none;
+}
 ```
 
 ### API
