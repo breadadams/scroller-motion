@@ -4,8 +4,9 @@
   "description": "🛹 Elegant motion scrolling for React",
   "source": "src/index.ts",
   "main": "dist/index.js",
-  "module": "dist/index.modern.js",
-  "umd:main": "dist/index.umd.js",
+  "exports": "dist/index.modern.js",
+  "module": "dist/index.module.js",
+  "unpkg": "dist/index.umd.js",
   "types": "dist/index.d.ts",
   "author": "Wombak <hello@wombak.xyz> (https://wombak.xyz/)",
   "contributors": [
@@ -21,46 +22,44 @@
   },
   "scripts": {
     "clean": "rm -rf dist",
-    "build": "npm run clean && microbundle --jsx React.createElement -f modern,cjs,umd",
+    "build": "npm run clean && microbundle --jsx React.createElement",
     "build:storybook": "build-storybook",
     "dev": "start-storybook",
     "prepublishOnly": "npm run build",
     "prettier:format": "prettier --write .",
-    "prettier:check": "prettier --check ."
+    "prettier:check": "prettier --check .",
+    "prettier:staged": "pretty-quick --staged",
+    "prepare": "husky install"
   },
   "license": "MIT",
   "dependencies": {
     "actual": "^0.4.0",
-    "debounce-fn": "^4.0.0"
+    "debounce-fn": "^5.0.0"
   },
   "peerDependencies": {
-    "framer-motion": "^4",
-    "react": "^16.8"
+    "framer-motion": "^3 || ^4",
+    "react": "^16.8 || ^17"
   },
   "devDependencies": {
-    "@babel/core": "^7.9.0",
-    "@babel/plugin-proposal-optional-chaining": "^7.9.0",
+    "@babel/core": "^7.13.5",
+    "@babel/plugin-proposal-optional-chaining": "^7.13.12",
     "@storybook/addon-links": "^6.2.7",
     "@storybook/addons": "^6.2.7",
     "@storybook/react": "^6.2.7",
-    "@types/node": "^13.13.4",
-    "@types/react": "^16.9.34",
-    "@types/resize-observer-browser": "^0.1.3",
-    "@types/styled-components": "^5.1.0",
-    "babel-loader": "^8.1.0",
+    "@types/node": "^14.14.37",
+    "@types/react": "^17.0.3",
+    "@types/resize-observer-browser": "^0.1.5",
+    "@types/styled-components": "^5.1.9",
     "framer-motion": "^4.1.3",
-    "husky": "^4.2.5",
-    "microbundle": "^0.12.0-next.8",
-    "prettier": "2.0.5",
-    "pretty-quick": "^2.0.1",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
+    "husky": "^6.0.0",
+    "microbundle": "^0.13.0",
+    "postcss": "^8.2.9",
+    "prettier": "2.2.1",
+    "pretty-quick": "^3.1.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
     "storybook-addon-jsx": "^7.3.7",
-    "storybook-addon-state": "^1.0.3",
-    "styled-components": "^5.1.0",
-    "ts-loader": "^7.0.1",
-    "tslib": "^1.11.1",
-    "typescript": "^3.8.3"
+    "styled-components": "^5.2.3"
   },
   "files": [
     "dist/*"
@@ -75,9 +74,7 @@
     "parallax",
     "smooth"
   ],
-  "husky": {
-    "hooks": {
-      "pre-commit": "pretty-quick --staged"
-    }
+  "engines": {
+    "node": ">= 12"
   }
 }
