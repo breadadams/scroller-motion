@@ -16,7 +16,10 @@ export const useAxis = ({
   refSize,
   windowSize
 }: Options) => {
-  const scaledSize = useMemo(() => refSize * scale, [refSize, scale])
+  const scaledSize = useMemo(
+    () => (refSize > windowSize ? refSize * scale : refSize),
+    [refSize, scale, windowSize]
+  )
 
   const transformFrom = useMemo(() => [0, scaledSize - windowSize], [
     scaledSize,
