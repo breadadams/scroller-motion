@@ -119,6 +119,7 @@ For example, if we want to use the y-axis scroll position:
 
 ```tsx
 import React, { useEffect, useRef } from 'react'
+import { useMotionValue } from 'framer-motion'
 import { ScrollerMotion, ScrollerMotionRef } from 'scroller-motion'
 
 export default () => {
