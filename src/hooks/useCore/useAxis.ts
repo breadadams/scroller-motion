@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
 import { useTransform } from 'framer-motion'
 
-import { MotionValue } from '@/types'
+import { MotionValue } from '../../types'
 
 interface Options {
   axisSpring: MotionValue

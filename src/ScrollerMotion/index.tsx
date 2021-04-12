@@ -1,19 +1,29 @@
-import React, { Fragment, useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 
-import Core, { CoreProps } from './Core'
+import { CoreProps, CoreRef } from '../types'
+import { Core } from './Core'
 
-const ScrollerMotion: React.FC<CoreProps> = ({ children, ...props }) => {
-  const [render, setRender] = useState(false)
+// https://github.com/JedWatson/exenv/blob/master/index.js
+const canUseDOM = !!(
+  typeof window !== 'undefined' &&
+  window.document &&
+  window.document.createElement
+)
 
-  useEffect(() => {
-    setRender(true)
-  }, [])
+export const ScrollerMotion = React.forwardRef<CoreRef, CoreProps>(
+  ({ children, disabled, ...props }, ref) => {
+    const [render, setRender] = useState(canUseDOM)
 
-  if (!render) {
-    return <Fragment>{children}</Fragment>
+    const isDisabled = useMemo(() => !render || disabled, [disabled, render])
+
+    useEffect(() => {
+      setRender(true)
+    }, [])
+
+    return (
+      <Core {...props} disabled={isDisabled} ref={ref}>
+        {children}
+      </Core>
+    )
   }
-
-  return <Core {...props}>{children}</Core>
-}
-
-export default ScrollerMotion
+)

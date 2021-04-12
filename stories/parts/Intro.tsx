@@ -97,7 +97,7 @@ const storyLinks = [
   { label: 'Default', path: 'default-story' },
   { label: 'Slow Scroll', path: 'scale' },
   { label: 'Custom Spring', path: 'spring' },
-  { label: 'onUpdate Listener', path: 'on-update' }
+  { label: 'Motion Listeners', path: 'motion-listeners' }
 ]
 
 const IntroLink: React.FC<{ path: string }> = ({ children, path }) => {

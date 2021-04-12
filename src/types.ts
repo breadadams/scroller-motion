@@ -4,31 +4,34 @@ import { MotionValue } from 'framer-motion'
 
 type ChildrenRef = MutableRefObject<HTMLDivElement | null>
 
+interface CoreProps extends DivElementProps {
+  disabled?: boolean
+  scale?: number
+  spring?: SpringProp
+}
+
 type DivElementProps = DetailedHTMLProps<
   HTMLAttributes<HTMLDivElement>,
   HTMLDivElement
 >
 
-type DOMSize = { height: number; width: number }
-
-type OnUpdateProp = (payload: {
-  scrollX: MotionValue
-  scrollY: MotionValue
-  x: MotionValue
-  y: MotionValue
-}) => void
-
-type ScaleProp = number
+type CoreRef =
+  | {
+      scrollX: MotionValue
+      scrollY: MotionValue
+      x: MotionValue
+      y: MotionValue
+    }
+  | undefined
 
 type SpringProp = SpringOptions | null | undefined | false
 
 export type {
   ChildrenRef,
+  CoreProps,
   DivElementProps,
-  DOMSize,
   MotionValue,
-  OnUpdateProp,
-  ScaleProp,
+  CoreRef,
   SpringOptions,
   SpringProp
 }

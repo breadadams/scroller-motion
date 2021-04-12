@@ -21,10 +21,10 @@
     "url": "https://github.com/wombak/scroller-motion/issues"
   },
   "scripts": {
+    "start": "start-storybook",
     "clean": "rm -rf dist",
     "build": "npm run clean && microbundle --jsx React.createElement",
     "build:storybook": "build-storybook",
-    "dev": "start-storybook",
     "prepublishOnly": "npm run build",
     "prettier:format": "prettier --write .",
     "prettier:check": "prettier --check .",
@@ -33,7 +33,6 @@
   },
   "license": "MIT",
   "dependencies": {
-    "actual": "^0.4.0",
     "debounce-fn": "^5.0.0"
   },
   "peerDependencies": {
@@ -59,7 +58,8 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "storybook-addon-jsx": "^7.3.7",
-    "styled-components": "^5.2.3"
+    "styled-components": "^5.2.3",
+    "typescript": "^4.2.4"
   },
   "files": [
     "dist/*"

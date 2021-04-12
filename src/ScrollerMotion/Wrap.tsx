@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react'
 import { motion } from 'framer-motion'
 
-import { ChildrenRef, DivElementProps, MotionValue } from '@/types'
+import { ChildrenRef, DivElementProps, MotionValue } from '../types'
 
 interface Props extends DivElementProps {
   childrenRef: ChildrenRef
@@ -20,7 +20,7 @@ const FIXED_STYLE = {
   bottom: 0
 }
 
-const Wrap: React.FC<Props> = ({
+export const Wrap: React.FC<Props> = ({
   children,
   childrenRef,
   disabled,
@@ -51,5 +51,3 @@ const Wrap: React.FC<Props> = ({
     </div>
   )
 }
-
-export default Wrap

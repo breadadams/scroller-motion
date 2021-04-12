@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useMotionValue } from 'framer-motion'
 
-import ScrollerMotion from '../src'
+import { ScrollerMotion, ScrollerMotionRef } from '../src'
 
 import { ColorBlocks, CornerControls, Intro, ScrollMarker } from './parts'
 
@@ -147,39 +147,51 @@ export const Spring = (): JSX.Element => {
 }
 Spring.parameters = STORY_PARAMETERS
 
-/* `onUpdate` Story */
+/* Motion Listeners Story */
 
-const OnUpdateContents: ContentsType = ({ isVertical }) => (
+const MotionListenersContents: ContentsType = ({ isVertical }) => (
   <>
     <Intro>
-      The <code>onUpdate</code> props allows you to access the inner{' '}
-      <code>MotionValue</code>'s for the scroll and the CSS transform.
+      To attach listeners, you can obtain the inner <code>MotionValue</code>{' '}
+      values for the scroll and the CSS transform via the <code>ref</code> on{' '}
+      <code>{'<ScrollerMotion />'}</code>.
     </Intro>
     <ColorBlocks isVertical={isVertical} />
   </>
 )
-OnUpdateContents.displayName = CONTENTS_DISPLAY_NAME
+MotionListenersContents.displayName = CONTENTS_DISPLAY_NAME
 
-export const OnUpdate = (): JSX.Element => {
+export const MotionListeners = (): JSX.Element => {
   const [enabled, setEnabled] = useState(true)
   const [isVertical, setIsVertical] = useState(true)
+
+  const scrollerMotion = useRef<ScrollerMotionRef>()
   const scrollX = useMotionValue(0)
   const scrollY = useMotionValue(0)
   const x = useMotionValue(0)
   const y = useMotionValue(0)
 
-  const onUpdate = (payload) =>
-    window.requestAnimationFrame(() => {
-      scrollX.set(payload.scrollX.get())
-      scrollY.set(payload.scrollY.get())
-      x.set(payload.x.get())
-      y.set(payload.y.get())
-    })
+  useEffect(() => {
+    const listeners: Array<(() => void) | undefined> = []
+
+    if (scrollerMotion.current) {
+      listeners.push(
+        scrollerMotion.current.scrollX.onChange((e) => scrollX.set(e))
+      )
+      listeners.push(
+        scrollerMotion.current.scrollY.onChange((e) => scrollY.set(e))
+      )
+      listeners.push(scrollerMotion.current.x.onChange((e) => x.set(e)))
+      listeners.push(scrollerMotion.current.y.onChange((e) => y.set(e)))
+    }
+
+    return () => listeners.forEach((func) => func && func())
+  }, [scrollX, scrollY, x, y])
 
   return (
     <>
-      <ScrollerMotion disabled={!enabled} onUpdate={onUpdate}>
-        <OnUpdateContents isVertical={isVertical} />
+      <ScrollerMotion disabled={!enabled} ref={scrollerMotion}>
+        <MotionListenersContents isVertical={isVertical} />
 
         {enabled && (
           <ScrollMarker scrollX={scrollX} scrollY={scrollY} x={x} y={y} />
@@ -195,8 +207,7 @@ export const OnUpdate = (): JSX.Element => {
     </>
   )
 }
-OnUpdate.storyName = 'onUpdate'
-OnUpdate.parameters = {
+MotionListeners.parameters = {
   jsx: {
     filterProps: [
       ...STORY_PARAMETERS.jsx.filterProps,

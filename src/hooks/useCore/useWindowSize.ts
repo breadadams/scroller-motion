@@ -1,17 +1,21 @@
-import { useLayoutEffect, useState } from 'react'
-import actual from 'actual'
+import { useEffect, useState } from 'react'
 
-import { DOMSize } from '@/types'
+const getWindowSize = () => ({
+  width:
+    window.innerWidth ||
+    document.documentElement.clientWidth ||
+    document.body.clientWidth,
+  height:
+    window.innerHeight ||
+    document.documentElement.clientHeight ||
+    document.body.clientHeight
+})
 
-export const useWindowSize = (): DOMSize => {
+export const useWindowSize = () => {
   const [size, setSize] = useState({ height: 0, width: 0 })
 
-  useLayoutEffect(() => {
-    const onResize = () =>
-      setSize({
-        height: actual('height', 'px'),
-        width: actual('width', 'px')
-      })
+  useEffect(() => {
+    const onResize = () => setSize(getWindowSize())
 
     onResize()
     window.addEventListener('resize', onResize, false)

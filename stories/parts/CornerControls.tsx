@@ -41,6 +41,7 @@ const Emoji = styled.span`
 
 const resetScroll = () => window.scrollTo({ left: 0, top: 0 })
 const scrollDown = () => window.scrollBy({ top: 250, behavior: 'smooth' })
+const scrollRight = () => window.scrollBy({ left: 250, behavior: 'smooth' })
 
 export const CornerControls: React.FC<Props> = ({
   isEnabled,
@@ -64,8 +65,9 @@ export const CornerControls: React.FC<Props> = ({
       {isEnabled ? 'Disable' : 'Enable'}
     </CornerButton>
 
-    <CornerButton onClick={scrollDown}>
-      <Emoji>👇</Emoji> Scroll Down
+    <CornerButton onClick={isVertical ? scrollDown : scrollRight}>
+      <Emoji>{isVertical ? '👇' : '👉'}</Emoji> Scroll{' '}
+      {isVertical ? 'Down' : 'Right'}
     </CornerButton>
   </CornerButtons>
 )

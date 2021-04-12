@@ -18,7 +18,8 @@
 
 1. [Installation](#installation)
 1. [Usage](#usage)
-1. [API](#api)
+1. [Props](#props)
+1. [Listeners](#motion-listeners)
 1. [About](#about)
 1. [Contributing](#contributing)
 1. [License](#license)
@@ -46,11 +47,11 @@ Implementing **scroller-motion** couldn't be easier, simply wrap your page with 
 ```jsx
 /* pages/index.jsx */
 
-import ScrollerMotion from 'scroller-motion'
+import { ScrollerMotion } from 'scroller-motion'
 
 export default () => (
   <ScrollerMotion>
-    <MyPageContents />
+    <MyComponent />
   </ScrollerMotion>
 )
 ```
@@ -68,7 +69,7 @@ body {
 }
 ```
 
-### API
+### Props
 
 All props are optional.
 
@@ -78,20 +79,6 @@ type: `boolean` <br/>
 default: `false`
 
 Completly disables and unmounts the `ScrollerMotion` component. Any children will be rendered through a React `<Fragment>` in this case (thus falling back to native scrolling).
-
-#### `onUpdate`
-
-type: `({ scrollX: MotionValue, scrollY: MotionValue, x: MotionValue, y: MotionValue }) => void` <br/>
-default: `undefined`
-
-[**View demo**](https://scroller-motion.wombak.xyz/?path=/story/scrollermotion--with-listener)
-
-A callback event attached internally to the scroll's MotionValue. It fires periodically when the MotionValue updates, the object contains:
-
-- `scrollX` & `scrollY`: `MotionValue` of the current (spring) scroll position.
-- `x` & `y`: `MotionValue` of the current transform (useful for calculating the scroll position when `scale` is in-use).
-
-For accessing the _native_ scroll value (without any spring motion) we suggest using framer-motion's [`useViewportScroll`](https://www.framer.com/api/motion/motionvalue/#useviewportscroll).
 
 #### `scale`
 
@@ -114,6 +101,47 @@ default: `{ mass: 1.25, stiffness: 200, damping: 50 }`
 The main configuration object for the scroll's spring transform, basically the 2nd parameter to framer-motion's [useSpring](https://www.framer.com/api/motion/types/#spring).
 
 You can disable the spring scroll by passing a falsy value to this prop, for example: `<ScollerMotion spring={null} />`.
+
+### Motion Listeners
+
+[**View demo**](https://scroller-motion.wombak.xyz/?path=/story/scrollermotion--motion-listeners)
+
+If you need to read/use the internal `MotionValue` values, you can do so by accessing them on a `ref` obtained from `<ScrollerMotion />`. The type of the ref is as follows:
+
+```ts
+{ scrollX: MotionValue, scrollY: MotionValue, x: MotionValue, y: MotionValue }
+```
+
+- `scrollX` & `scrollY`: The current (spring) scroll position.
+- `x` & `y`: The current transform (useful for calculating scroll position when `scale` is in-use).
+
+For example, if we want to use the y-axis scroll position:
+
+```tsx
+import React, { useEffect, useRef } from 'react'
+import { ScrollerMotion, ScrollerMotionRef } from 'scroller-motion'
+
+export default () => {
+  const scrollerMotion = useRef<ScrollerMotionRef>()
+  const scrollY = useMotionValue(0)
+
+  useEffect(() => {
+    const unsubscribe = scrollerMotion.current.scrollY.onChange((v) =>
+      scrollY.set(v)
+    )
+
+    return () => unsubscribe()
+  }, [scrollY])
+
+  return (
+    <ScrollerMotion ref={scrollerMotion}>
+      <MyComponent scrollPosition={scrollY} />
+    </ScrollerMotion>
+  )
+}
+```
+
+For accessing the _native_ scroll value (without any spring motion) we suggest using framer-motion's [`useViewportScroll`](https://www.framer.com/api/motion/motionvalue/#useviewportscroll).
 
 ### About
 
@@ -139,7 +167,7 @@ These are the current scripts available for development:
 
 ```bash
 # Start Storybook
-npm run dev
+npm run start
 
 # Build dist files
 npm run build
