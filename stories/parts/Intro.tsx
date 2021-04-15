@@ -119,12 +119,9 @@ export const Intro: React.FC = ({ children }) => (
     <IntroTitle>scroller-motion</IntroTitle>
 
     <Badges>
-      <a
-        href="https://www.npmjs.com/package/scroller-motion/v/beta"
-        target="_blank"
-      >
+      <a href="https://www.npmjs.com/package/scroller-motion" target="_blank">
         <img
-          src="https://img.shields.io/npm/v/scroller-motion/beta?style=flat-square"
+          src="https://img.shields.io/npm/v/scroller-motion?style=flat-square"
           alt="NPM Package Version"
         />
       </a>{' '}

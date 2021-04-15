@@ -1,8 +1,8 @@
 <h2 align="center">🛹 <br />scroller-motion</h2>
 
 <p align="center">
-  <a href="https://www.npmjs.com/package/scroller-motion/v/beta" target="_blank">
-    <img src="https://img.shields.io/npm/v/scroller-motion/beta?style=flat-square" alt="NPM Package Version" />
+  <a href="https://www.npmjs.com/package/scroller-motion" target="_blank">
+    <img src="https://img.shields.io/npm/v/scroller-motion?style=flat-square" alt="NPM Package Version" />
   </a>
   <a href="https://scroller-motion.wombak.xyz/" target="_blank">
     <img src="https://raw.githubusercontent.com/storybooks/brand/master/badge/badge-storybook.svg" alt="Project Storybook">
