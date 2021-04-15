@@ -19,6 +19,7 @@
 1. [Installation](#installation)
 1. [Usage](#usage)
 1. [Props](#props)
+1. [useScrollerMotion](#usescrollermotion-hook)
 1. [Listeners](#motion-listeners)
 1. [About](#about)
 1. [Contributing](#contributing)
@@ -102,11 +103,11 @@ The main configuration object for the scroll's spring transform, basically the 2
 
 You can disable the spring scroll by passing a falsy value to this prop, for example: `<ScollerMotion spring={null} />`.
 
-### Motion Listeners
+### `useScrollerMotion` hook
 
-[**View demo**](https://scroller-motion.wombak.xyz/?path=/story/scrollermotion--motion-listeners)
+[**View demo**](https://scroller-motion.wombak.xyz/?path=/story/scrollermotion--use-scroller-motion)
 
-If you need to read/use the internal `MotionValue` values, you can do so by accessing them on a `ref` obtained from `<ScrollerMotion />`. The type of the ref is as follows:
+This hook allows you to consume the internal `MotionValue` values, returning an object of the following type:
 
 ```ts
 { scrollX: MotionValue, scrollY: MotionValue, x: MotionValue, y: MotionValue }
@@ -114,6 +115,31 @@ If you need to read/use the internal `MotionValue` values, you can do so by acce
 
 - `scrollX` & `scrollY`: The current (spring) scroll position.
 - `x` & `y`: The current transform (useful for calculating scroll position when `scale` is in-use).
+
+It must be used within a `<ScrollerMotion />`, to read the values in the parent component see [Motion Listeners](#motion-listeners).
+
+```tsx
+import { ScrollerMotion, useScrollerMotion } from 'scroller-motion'
+import { motion } from 'framer-motion'
+
+const MyComponent = () => {
+  const { x, y } = useScrollerMotion()
+
+  return <motion.div style={{ x, y }}>Hello world</motion.div>
+}
+
+export default () => (
+  <ScrollerMotion>
+    <MyComponent />
+  </ScrollerMotion>
+)
+```
+
+### Motion Listeners
+
+[**View demo**](https://scroller-motion.wombak.xyz/?path=/story/scrollermotion--motion-listeners)
+
+Another approach if you need to read/use the internal `MotionValue` values is via the `ref` prop on `<ScrollerMotion />`. The type of the ref is the same as the object returned from [`useScrollerMotion`](#usescrollermotion-hook).
 
 For example, if we want to use the y-axis scroll position:
 
@@ -150,13 +176,13 @@ For accessing the _native_ scroll value (without any spring motion) we suggest u
 
 - 🏀 Configurable motion via the `spring` prop
 - 🐌 "Slow scroll" via the `scale` prop
-- 👂 Listen to the motion scroll value with `onUpdate`
+- 👂 Subscribe to the scroll values with `useScrollerMotion`
 - ⚙️ SSR compatible
 - 🤖 Fully typed w/ TypeScript
 - 🎣 Built around React hooks
 - ⚖️ Only 2.2kb gzipped
 
-It's still a `@beta` release, with a public roadmap for the stable v1 available [here](https://github.com/wombak/scroller-motion/projects/1).
+It's still considered a `beta` release, with a public roadmap for the stable v1 available [here](https://github.com/wombak/scroller-motion/projects/1).
 
 > Note: Currently **scroller-motion** only supports motion scrolling on the main window/body. The stable release _should_ allow for motion scrolling on any DOM element.
 

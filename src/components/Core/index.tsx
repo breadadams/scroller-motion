@@ -6,6 +6,7 @@ import React, {
   useState
 } from 'react'
 
+import { Context } from '../../context'
 import { useCore } from '../../hooks'
 import { CoreProps, CoreRef } from '../../types'
 
@@ -55,6 +56,13 @@ export const Core = React.forwardRef<CoreRef, CoreProps>(
 
     const isDisabled = useMemo(() => !render || disabled, [disabled, render])
 
+    const contextValue = useMemo(() => ({ scrollX, scrollY, x, y }), [
+      scrollX,
+      scrollY,
+      x,
+      y
+    ])
+
     useEffect(() => {
       setRender(true)
     }, [])
@@ -69,8 +77,10 @@ export const Core = React.forwardRef<CoreRef, CoreProps>(
         x={x}
         y={y}
       >
-        {children}
+        <Context.Provider value={contextValue}>{children}</Context.Provider>
       </Wrap>
     )
   }
 )
+
+Core.displayName = 'ScrollerMotion'

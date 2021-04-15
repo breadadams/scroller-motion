@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useMotionValue } from 'framer-motion'
+import LinkTo from '@storybook/addon-links/react'
 
-import { ScrollerMotion, ScrollerMotionRef } from '../src'
+import { ScrollerMotion, ScrollerMotionRef, useScrollerMotion } from '../src'
 
 import { ColorBlocks, CornerControls, Intro, ScrollMarker } from './parts'
 
@@ -152,9 +153,15 @@ Spring.parameters = STORY_PARAMETERS
 const MotionListenersContents: ContentsType = ({ isVertical }) => (
   <>
     <Intro>
-      To attach listeners, you can obtain the inner <code>MotionValue</code>{' '}
+      Event listeners via the <code>ref</code> prop.
+      <br />
+      <br />
+      To attach listeners, you can obtain the inner <code>
+        MotionValue
+      </code>{' '}
       values for the scroll and the CSS transform via the <code>ref</code> on{' '}
-      <code>{'<ScrollerMotion />'}</code>.
+      <code>{'<ScrollerMotion />'}</code>. Alternatively, see {/* @ts-ignore */}
+      <LinkTo story="use-scroller-motion">useScrollerMotion</LinkTo>.{' '}
     </Intro>
     <ColorBlocks isVertical={isVertical} />
   </>
@@ -168,8 +175,6 @@ export const MotionListeners = (): JSX.Element => {
   const scrollerMotion = useRef<ScrollerMotionRef>()
   const scrollX = useMotionValue(0)
   const scrollY = useMotionValue(0)
-  const x = useMotionValue(0)
-  const y = useMotionValue(0)
 
   useEffect(() => {
     const listeners: Array<(() => void) | undefined> = []
@@ -181,21 +186,17 @@ export const MotionListeners = (): JSX.Element => {
       listeners.push(
         scrollerMotion.current.scrollY.onChange((e) => scrollY.set(e))
       )
-      listeners.push(scrollerMotion.current.x.onChange((e) => x.set(e)))
-      listeners.push(scrollerMotion.current.y.onChange((e) => y.set(e)))
     }
 
     return () => listeners.forEach((func) => func && func())
-  }, [scrollX, scrollY, x, y])
+  }, [scrollX, scrollY])
 
   return (
     <>
       <ScrollerMotion disabled={!enabled} ref={scrollerMotion}>
         <MotionListenersContents isVertical={isVertical} />
 
-        {enabled && (
-          <ScrollMarker scrollX={scrollX} scrollY={scrollY} x={x} y={y} />
-        )}
+        {enabled && <ScrollMarker scrollX={scrollX} scrollY={scrollY} />}
       </ScrollerMotion>
 
       <CornerControls
@@ -209,13 +210,54 @@ export const MotionListeners = (): JSX.Element => {
 }
 MotionListeners.parameters = {
   jsx: {
-    filterProps: [
-      ...STORY_PARAMETERS.jsx.filterProps,
-      'scrollX',
-      'scrollY',
-      'x',
-      'y'
-    ],
+    filterProps: [...STORY_PARAMETERS.jsx.filterProps, 'scrollX', 'scrollY'],
     showFunctions: false
   }
 }
+
+/* `useScrollerMotion` Story */
+
+const UseScrollerMotionContents: ContentsType = ({ isVertical }) => (
+  <>
+    <Intro>
+      Reading values via the <code>useScrollerMotion</code> hook.
+      <br />
+      <br />
+      Same example as <em>Motion Listeners</em>, however here the{' '}
+      <code>{'<ScrollMarker />'}</code> component obtains its values via the
+      hook (using Context API).
+    </Intro>
+    <ColorBlocks isVertical={isVertical} />
+  </>
+)
+UseScrollerMotionContents.displayName = CONTENTS_DISPLAY_NAME
+
+const ContextScrollMarker = () => {
+  const { scrollX, scrollY } = useScrollerMotion()
+
+  return <ScrollMarker scrollX={scrollX} scrollY={scrollY} />
+}
+
+export const UseScrollerMotion = (): JSX.Element => {
+  const [enabled, setEnabled] = useState(true)
+  const [isVertical, setIsVertical] = useState(true)
+
+  return (
+    <>
+      <ScrollerMotion disabled={!enabled}>
+        <UseScrollerMotionContents isVertical={isVertical} />
+
+        {enabled && <ContextScrollMarker />}
+      </ScrollerMotion>
+
+      <CornerControls
+        isEnabled={enabled}
+        isVertical={isVertical}
+        onToggleDirection={() => setIsVertical((v) => !v)}
+        onToggleEnable={() => setEnabled((e) => !e)}
+      />
+    </>
+  )
+}
+UseScrollerMotion.storyName = 'useScrollerMotion'
+UseScrollerMotion.parameters = STORY_PARAMETERS

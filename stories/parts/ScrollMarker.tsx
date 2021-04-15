@@ -5,8 +5,6 @@ import { motion, MotionValue } from 'framer-motion'
 interface Props {
   scrollX: MotionValue
   scrollY: MotionValue
-  x: MotionValue
-  y: MotionValue
 }
 
 const MarkerWrap = styled(motion.div)`
@@ -22,37 +20,27 @@ const MarkerWrap = styled(motion.div)`
   backface-visibility: hidden;
 `
 
-export const ScrollMarker: React.FC<Props> = ({ scrollX, scrollY, x, y }) => {
+export const ScrollMarker: React.FC<Props> = ({ scrollX, scrollY }) => {
   const [scrollXRaw, setScrollXRaw] = useState(0)
   const [scrollYRaw, setScrollYRaw] = useState(0)
-  const [xRaw, setXRaw] = useState(0)
-  const [yRaw, setYRaw] = useState(0)
 
   useEffect(() => {
     const onChangeScrollX = () => setScrollXRaw(scrollX.get())
     const onChangeScrollY = () => setScrollYRaw(scrollY.get())
-    const onChangeX = () => setXRaw(x.get())
-    const onChangeY = () => setYRaw(y.get())
 
     const unsubScrollX = scrollX.onChange(onChangeScrollX)
     const unsubScrollY = scrollY.onChange(onChangeScrollY)
-    const unsubX = x.onChange(onChangeX)
-    const unsubY = y.onChange(onChangeY)
 
     return () => {
       unsubScrollX()
       unsubScrollY()
-      unsubX()
-      unsubY()
     }
-  }, [scrollY, y])
+  }, [scrollX, scrollY])
 
   return (
     <MarkerWrap style={{ x: scrollX, y: scrollY }}>
-      <code>scrollX: {scrollXRaw}px</code> <br />
-      <code>scrollY: {scrollYRaw}px</code> <br />
-      <code>x: {xRaw}px</code> <br />
-      <code>y: {yRaw}px</code>
+      scrollX: <code>{scrollXRaw}</code> <br />
+      scrollY: <code>{scrollYRaw}</code> <br />
     </MarkerWrap>
   )
 }

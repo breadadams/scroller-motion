@@ -15,23 +15,24 @@ type DivElementProps = DetailedHTMLProps<
   HTMLDivElement
 >
 
-type CoreRef =
-  | {
-      scrollX: MotionValue
-      scrollY: MotionValue
-      x: MotionValue
-      y: MotionValue
-    }
-  | undefined
+type CoreRef = ScrollerMotionValues | undefined
+
+interface ScrollerMotionValues {
+  scrollX: MotionValue
+  scrollY: MotionValue
+  x: MotionValue
+  y: MotionValue
+}
 
 type SpringProp = SpringOptions | null | undefined | false
 
 export type {
   ChildrenRef,
   CoreProps,
+  CoreRef,
   DivElementProps,
   MotionValue,
-  CoreRef,
+  ScrollerMotionValues,
   SpringOptions,
   SpringProp
 }
