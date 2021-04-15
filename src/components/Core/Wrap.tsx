@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react'
 import { motion } from 'framer-motion'
 
-import { ChildrenRef, DivElementProps, MotionValue } from '../types'
+import { ChildrenRef, DivElementProps, MotionValue } from '../../types'
 
 interface Props extends DivElementProps {
   childrenRef: ChildrenRef
