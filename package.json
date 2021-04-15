@@ -4,13 +4,12 @@
   "description": "🛹 Elegant motion scrolling for React",
   "source": "src/index.ts",
   "main": "dist/index.js",
-  "exports": "dist/index.modern.js",
-  "module": "dist/index.module.js",
+  "module": "dist/index.modern.js",
   "unpkg": "dist/index.umd.js",
   "types": "dist/index.d.ts",
-  "author": "Wombak <hello@wombak.xyz> (https://wombak.xyz/)",
+  "author": "Brad Adams <hi@breadadams.com> (https://breadadams.com/)",
   "contributors": [
-    "Brad Adams <hi@breadadams.com> (https://breadadams.com/)"
+    "Rijk van Wel <rijk@uniti.be> (https://github.com/rijk)"
   ],
   "homepage": "https://scroller-motion.wombak.xyz",
   "repository": {
@@ -23,7 +22,7 @@
   "scripts": {
     "start": "start-storybook",
     "clean": "rm -rf dist",
-    "build": "npm run clean && microbundle --jsx React.createElement",
+    "build": "npm run clean && microbundle --jsx React.createElement -f modern,cjs,umd",
     "build:storybook": "build-storybook",
     "prepublishOnly": "npm run build",
     "prettier:format": "prettier --write .",
@@ -33,7 +32,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "debounce-fn": "^5.0.0"
+    "debounce-fn": "^4.0.0"
   },
   "peerDependencies": {
     "framer-motion": "^3 || ^4",

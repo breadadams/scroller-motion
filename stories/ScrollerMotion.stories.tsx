@@ -31,7 +31,7 @@ const DefaultContents: ContentsType = ({ isVertical }) => (
     <Intro>
       The default appearance of <code>&lt;ScrollerMotion /&gt;</code>.<br />
       <br /> Try scrolling through this list of colors, you can click on each
-      block to toggle its height.
+      block to toggle its size.
     </Intro>
 
     <ColorBlocks isVertical={isVertical} />
