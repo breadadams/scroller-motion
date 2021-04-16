@@ -1,6 +1,6 @@
 # Scroller-motion Change Log
 
-## v0.0.1
+## v0.0.2
 
 - Feature: Add `useScrollerMotion` hook ([cff376f5](https://github.com/wombak/scroller-motion/commit/cff376f5))
 - Feature: Expose motion values on `ref` ([1e9c73e7](https://github.com/wombak/scroller-motion/commit/1e9c73e7))
