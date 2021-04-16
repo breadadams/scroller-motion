@@ -40,7 +40,7 @@ export const ScrollMarker: React.FC<Props> = ({ scrollX, scrollY }) => {
   return (
     <MarkerWrap style={{ x: scrollX, y: scrollY }}>
       scrollX: <code>{scrollXRaw}</code> <br />
-      scrollY: <code>{scrollYRaw}</code> <br />
+      scrollY: <code>{scrollYRaw}</code>
     </MarkerWrap>
   )
 }
