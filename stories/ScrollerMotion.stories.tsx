@@ -1,69 +1,70 @@
-import React, { useCallback, useState } from 'react'
-import { useMotionValue, MotionValue } from 'framer-motion'
+import React, { useEffect, useRef, useState } from 'react'
+import { useMotionValue } from 'framer-motion'
+import LinkTo from '@storybook/addon-links/react'
 
-import ScrollerMotion from '../src'
-import { OnUpdateProp } from '../src/types'
+import { ScrollerMotion, ScrollerMotionRef, useScrollerMotion } from '../src'
 
 import { ColorBlocks, CornerControls, Intro, ScrollMarker } from './parts'
-
-const useYListener = (): [MotionValue, OnUpdateProp] => {
-  const innerY = useMotionValue(0)
-
-  const onUpdate = useCallback(
-    ({ y }) => window.requestAnimationFrame(() => innerY.set(y.get() * -1)),
-    [innerY]
-  )
-
-  return [innerY, onUpdate]
-}
 
 export default {
   title: 'ScrollerMotion',
   component: ScrollerMotion
 }
 
-const DefaultStoryContents = () => (
+const CONTENTS_DISPLAY_NAME = 'StoryContents'
+const STORY_PARAMETERS = {
+  jsx: {
+    filterProps: [
+      'isEnabled',
+      'isVertical',
+      'onToggleDirection',
+      'onToggleEnable'
+    ]
+  }
+}
+
+type ContentsType = React.FC<{ isVertical: boolean }>
+
+/* Default Story */
+
+const DefaultContents: ContentsType = ({ isVertical }) => (
   <>
     <Intro>
       The default appearance of <code>&lt;ScrollerMotion /&gt;</code>.<br />
       <br /> Try scrolling through this list of colors, you can click on each
-      block to toggle it's height.
+      block to toggle its size.
     </Intro>
 
-    <ColorBlocks />
+    <ColorBlocks isVertical={isVertical} />
   </>
 )
-DefaultStoryContents.displayName = 'StoryContents'
+DefaultContents.displayName = CONTENTS_DISPLAY_NAME
 
 export const DefaultStory = (): JSX.Element => {
   const [enabled, setEnabled] = useState(true)
-  const [y, onUpdate] = useYListener()
+  const [isVertical, setIsVertical] = useState(true)
 
   return (
-    <ScrollerMotion disabled={!enabled} onUpdate={onUpdate}>
-      <DefaultStoryContents />
+    <>
+      <ScrollerMotion disabled={!enabled}>
+        <DefaultContents isVertical={isVertical} />
+      </ScrollerMotion>
 
       <CornerControls
         isEnabled={enabled}
-        onToggleEnable={() => {
-          setEnabled(!enabled)
-        }}
-        yPos={y}
+        isVertical={isVertical}
+        onToggleDirection={() => setIsVertical((v) => !v)}
+        onToggleEnable={() => setEnabled((e) => !e)}
       />
-    </ScrollerMotion>
+    </>
   )
 }
-DefaultStory.story = {
-  name: 'Default',
-  parameters: {
-    jsx: {
-      filterProps: ['isEnabled', 'onToggleEnable', 'onUpdate', 'yPos'],
-      showFunctions: false
-    }
-  }
-}
+DefaultStory.storyName = 'Default'
+DefaultStory.parameters = STORY_PARAMETERS
 
-const ScaleStoryContents = () => (
+/* `scale` Story */
+
+const ScaleContents: ContentsType = ({ isVertical }) => (
   <>
     <Intro>
       Custom <code>scale</code> prop.
@@ -75,39 +76,35 @@ const ScaleStoryContents = () => (
       </span>
       , resulting in a <em>slow scroll</em> experience.
     </Intro>
-    <ColorBlocks />
+    <ColorBlocks isVertical={isVertical} />
   </>
 )
-ScaleStoryContents.displayName = 'StoryContents'
+ScaleContents.displayName = CONTENTS_DISPLAY_NAME
 
-export const CustomScale = (): JSX.Element => {
+export const Scale = (): JSX.Element => {
   const [enabled, setEnabled] = useState(true)
-  const [y, onUpdate] = useYListener()
+  const [isVertical, setIsVertical] = useState(true)
 
   return (
-    <ScrollerMotion disabled={!enabled} onUpdate={onUpdate} scale={1.5}>
-      <ScaleStoryContents />
+    <>
+      <ScrollerMotion disabled={!enabled} scale={1.5}>
+        <ScaleContents isVertical={isVertical} />
+      </ScrollerMotion>
 
       <CornerControls
         isEnabled={enabled}
-        onToggleEnable={() => {
-          setEnabled(!enabled)
-        }}
-        yPos={y}
+        isVertical={isVertical}
+        onToggleDirection={() => setIsVertical((v) => !v)}
+        onToggleEnable={() => setEnabled((e) => !e)}
       />
-    </ScrollerMotion>
+    </>
   )
 }
-CustomScale.story = {
-  parameters: {
-    jsx: {
-      filterProps: ['isEnabled', 'onToggleEnable', 'onUpdate', 'yPos'],
-      showFunctions: false
-    }
-  }
-}
+Scale.parameters = STORY_PARAMETERS
 
-const CustomSpringContents = () => (
+/* `spring` Story */
+
+const SpringContents: ContentsType = ({ isVertical }) => (
   <>
     <Intro>
       Custom <code>spring</code> prop.
@@ -119,88 +116,148 @@ const CustomSpringContents = () => (
       </a>
       .
     </Intro>
-    <ColorBlocks />
+    <ColorBlocks isVertical={isVertical} />
   </>
 )
-CustomSpringContents.displayName = 'StoryContents'
+SpringContents.displayName = CONTENTS_DISPLAY_NAME
 
-export const CustomSpring = (): JSX.Element => {
+const CUSTOM_SPRING = {
+  damping: 50,
+  mass: 10,
+  stiffness: 100
+}
+
+export const Spring = (): JSX.Element => {
   const [enabled, setEnabled] = useState(true)
-  const [y, onUpdate] = useYListener()
+  const [isVertical, setIsVertical] = useState(true)
 
   return (
-    <ScrollerMotion
-      disabled={!enabled}
-      onUpdate={onUpdate}
-      spring={{
-        mass: 2,
-        stiffness: 50,
-        damping: 200
-      }}
-    >
-      <CustomSpringContents />
+    <>
+      <ScrollerMotion disabled={!enabled} spring={CUSTOM_SPRING}>
+        <SpringContents isVertical={isVertical} />
+      </ScrollerMotion>
+
       <CornerControls
         isEnabled={enabled}
-        onToggleEnable={() => {
-          setEnabled(!enabled)
-        }}
-        yPos={y}
+        isVertical={isVertical}
+        onToggleDirection={() => setIsVertical((v) => !v)}
+        onToggleEnable={() => setEnabled((e) => !e)}
       />
-    </ScrollerMotion>
+    </>
   )
 }
-CustomSpring.story = {
-  parameters: {
-    jsx: {
-      filterProps: ['isEnabled', 'onToggleEnable', 'onUpdate', 'yPos'],
-      showFunctions: false
-    }
-  }
-}
+Spring.parameters = STORY_PARAMETERS
 
-const WithListenerContents: React.FC = () => (
+/* Motion Listeners Story */
+
+const MotionListenersContents: ContentsType = ({ isVertical }) => (
   <>
     <Intro>
-      The <code>onUpdate</code> props allows you to access the inner{' '}
-      <code>MotionValue</code>'s for the scroll and the CSS transform.
+      Event listeners via the <code>ref</code> prop.
+      <br />
+      <br />
+      To attach listeners, you can obtain the inner <code>
+        MotionValue
+      </code>{' '}
+      values for the scroll and the CSS transform via the <code>ref</code> on{' '}
+      <code>{'<ScrollerMotion />'}</code>. Alternatively, see {/* @ts-ignore */}
+      <LinkTo story="use-scroller-motion">useScrollerMotion</LinkTo>.{' '}
     </Intro>
-    <ColorBlocks />
+    <ColorBlocks isVertical={isVertical} />
   </>
 )
+MotionListenersContents.displayName = CONTENTS_DISPLAY_NAME
 
-WithListenerContents.displayName = 'StoryContents'
-
-export const WithListener = (): JSX.Element => {
+export const MotionListeners = (): JSX.Element => {
   const [enabled, setEnabled] = useState(true)
-  const scrollY = useMotionValue(0)
-  const y = useMotionValue(0)
+  const [isVertical, setIsVertical] = useState(true)
 
-  const onUpdate = (payload) =>
-    window.requestAnimationFrame(() => {
-      scrollY.set(payload.scrollY.get())
-      y.set(payload.y.get())
-    })
+  const scrollerMotion = useRef<ScrollerMotionRef>()
+  const scrollX = useMotionValue(0)
+  const scrollY = useMotionValue(0)
+
+  useEffect(() => {
+    const listeners: Array<(() => void) | undefined> = []
+
+    if (scrollerMotion.current) {
+      listeners.push(
+        scrollerMotion.current.scrollX.onChange((e) => scrollX.set(e))
+      )
+      listeners.push(
+        scrollerMotion.current.scrollY.onChange((e) => scrollY.set(e))
+      )
+    }
+
+    return () => listeners.forEach((func) => func && func())
+  }, [scrollX, scrollY])
 
   return (
-    <ScrollerMotion disabled={!enabled} onUpdate={onUpdate}>
-      <WithListenerContents />
+    <>
+      <ScrollerMotion disabled={!enabled} ref={scrollerMotion}>
+        <MotionListenersContents isVertical={isVertical} />
 
-      {enabled && <ScrollMarker scrollY={scrollY} y={y} />}
+        {enabled && <ScrollMarker scrollX={scrollX} scrollY={scrollY} />}
+      </ScrollerMotion>
 
       <CornerControls
         isEnabled={enabled}
-        onToggleEnable={() => {
-          setEnabled(!enabled)
-        }}
-        yPos={scrollY}
+        isVertical={isVertical}
+        onToggleDirection={() => setIsVertical((v) => !v)}
+        onToggleEnable={() => setEnabled((e) => !e)}
       />
-    </ScrollerMotion>
+    </>
   )
 }
-WithListener.story = {
-  parameters: {
-    jsx: {
-      filterProps: ['isEnabled', 'onToggleEnable', 'yPos']
-    }
+MotionListeners.parameters = {
+  jsx: {
+    filterProps: [...STORY_PARAMETERS.jsx.filterProps, 'scrollX', 'scrollY'],
+    showFunctions: false
   }
 }
+
+/* `useScrollerMotion` Story */
+
+const UseScrollerMotionContents: ContentsType = ({ isVertical }) => (
+  <>
+    <Intro>
+      Reading values via the <code>useScrollerMotion</code> hook.
+      <br />
+      <br />
+      Same example as <em>Motion Listeners</em>, however here the{' '}
+      <code>{'<ScrollMarker />'}</code> component obtains its values via the
+      hook (using Context API).
+    </Intro>
+    <ColorBlocks isVertical={isVertical} />
+  </>
+)
+UseScrollerMotionContents.displayName = CONTENTS_DISPLAY_NAME
+
+const ContextScrollMarker = () => {
+  const { scrollX, scrollY } = useScrollerMotion()
+
+  return <ScrollMarker scrollX={scrollX} scrollY={scrollY} />
+}
+
+export const UseScrollerMotion = (): JSX.Element => {
+  const [enabled, setEnabled] = useState(true)
+  const [isVertical, setIsVertical] = useState(true)
+
+  return (
+    <>
+      <ScrollerMotion disabled={!enabled}>
+        <UseScrollerMotionContents isVertical={isVertical} />
+
+        {enabled && <ContextScrollMarker />}
+      </ScrollerMotion>
+
+      <CornerControls
+        isEnabled={enabled}
+        isVertical={isVertical}
+        onToggleDirection={() => setIsVertical((v) => !v)}
+        onToggleEnable={() => setEnabled((e) => !e)}
+      />
+    </>
+  )
+}
+UseScrollerMotion.storyName = 'useScrollerMotion'
+UseScrollerMotion.parameters = STORY_PARAMETERS

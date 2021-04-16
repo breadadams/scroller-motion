@@ -1,12 +1,19 @@
 import React from 'react'
 import styled from 'styled-components'
-import { motion, MotionValue } from 'framer-motion'
 
-const CornerButtons = styled(motion.div)`
+interface Props {
+  isEnabled: boolean
+  isVertical: boolean
+  onToggleDirection: () => void
+  onToggleEnable: () => void
+}
+
+const CornerButtons = styled.div`
   position: fixed;
   top: 40px;
   right: 40px;
   z-index: 10;
+  backface-visibility: hidden;
 `
 
 const CornerButton = styled.button`
@@ -28,30 +35,41 @@ const CornerButton = styled.button`
   }
 `
 
-export const CornerControls: React.FC<{
-  isEnabled: boolean
-  onToggleEnable: () => void
-  yPos?: MotionValue
-}> = ({ isEnabled, onToggleEnable, yPos }) => {
-  const styles = isEnabled ? { y: yPos } : {}
+const Emoji = styled.span`
+  font-family: 'Segoe UI Emoji', 'Segoe UI Symbol';
+`
 
-  return (
-    <CornerButtons style={styles}>
-      <CornerButton onClick={onToggleEnable}>
-        {isEnabled ? '🚫 Disable' : '✅ Enable'}
-      </CornerButton>
-      <CornerButton
-        onClick={() => {
-          window.scrollBy({
-            top: 250,
-            behavior: 'smooth'
-          })
-        }}
-      >
-        👇 Scroll Down
-      </CornerButton>
-    </CornerButtons>
-  )
-}
+const resetScroll = () => window.scrollTo({ left: 0, top: 0 })
+const scrollDown = () => window.scrollBy({ top: 250, behavior: 'smooth' })
+const scrollRight = () => window.scrollBy({ left: 250, behavior: 'smooth' })
+
+export const CornerControls: React.FC<Props> = ({
+  isEnabled,
+  isVertical,
+  onToggleDirection,
+  onToggleEnable
+}) => (
+  <CornerButtons>
+    <CornerButton
+      onClick={() => {
+        onToggleDirection()
+        resetScroll()
+      }}
+    >
+      <Emoji>{isVertical ? '↔️' : '↕️'}</Emoji>{' '}
+      {isVertical ? 'Horizontal' : 'Vertical'}
+    </CornerButton>
+
+    <CornerButton onClick={onToggleEnable}>
+      <Emoji>{isEnabled ? '🚫' : '✅'}</Emoji>{' '}
+      {isEnabled ? 'Disable' : 'Enable'}
+    </CornerButton>
+
+    <CornerButton onClick={isVertical ? scrollDown : scrollRight}>
+      <Emoji>{isVertical ? '👇' : '👉'}</Emoji> Scroll{' '}
+      {isVertical ? 'Down' : 'Right'}
+    </CornerButton>
+  </CornerButtons>
+)
 
 CornerControls.displayName = 'Controls'
