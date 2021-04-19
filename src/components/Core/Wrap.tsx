@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import { FC, Fragment, useMemo } from 'react'
 import { motion } from 'framer-motion'
 
 import { ChildrenRef, DivElementProps, MotionValue } from '../../types'
@@ -20,7 +20,7 @@ const FIXED_STYLE = {
   bottom: 0
 }
 
-export const Wrap: React.FC<Props> = ({
+export const Wrap: FC<Props> = ({
   children,
   childrenRef,
   disabled,

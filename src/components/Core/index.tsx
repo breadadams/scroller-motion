@@ -1,4 +1,5 @@
-import React, {
+import {
+  forwardRef,
   useEffect,
   useImperativeHandle,
   useMemo,
@@ -27,7 +28,7 @@ const DEFAULT_SPRING = {
   stiffness: 200
 }
 
-export const Core = React.forwardRef<CoreRef, CoreProps>(
+export const Core = forwardRef<CoreRef, CoreProps>(
   (
     {
       children,

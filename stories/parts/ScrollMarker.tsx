@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { motion, MotionValue } from 'framer-motion'
 
@@ -20,7 +20,7 @@ const MarkerWrap = styled(motion.div)`
   backface-visibility: hidden;
 `
 
-export const ScrollMarker: React.FC<Props> = ({ scrollX, scrollY }) => {
+export const ScrollMarker: FC<Props> = ({ scrollX, scrollY }) => {
   const [scrollXRaw, setScrollXRaw] = useState(0)
   const [scrollYRaw, setScrollYRaw] = useState(0)
 

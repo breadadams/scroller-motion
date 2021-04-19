@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import { FC, useEffect, useRef, useState } from 'react'
 import { useMotionValue } from 'framer-motion'
 import LinkTo from '@storybook/addon-links/react'
 
@@ -23,7 +23,7 @@ const STORY_PARAMETERS = {
   }
 }
 
-type ContentsType = React.FC<{ isVertical: boolean }>
+type ContentsType = FC<{ isVertical: boolean }>
 
 /* Default Story */
 

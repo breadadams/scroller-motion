@@ -1,4 +1,4 @@
-import React from 'react'
+import { FC } from 'react'
 import styled from 'styled-components'
 
 interface Props {
@@ -43,7 +43,7 @@ const resetScroll = () => window.scrollTo({ left: 0, top: 0 })
 const scrollDown = () => window.scrollBy({ top: 250, behavior: 'smooth' })
 const scrollRight = () => window.scrollBy({ left: 250, behavior: 'smooth' })
 
-export const CornerControls: React.FC<Props> = ({
+export const CornerControls: FC<Props> = ({
   isEnabled,
   isVertical,
   onToggleDirection,
