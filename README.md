@@ -32,11 +32,11 @@
 To begin you'll want to install **scroller-motion** as well as the peer dependencies:
 
 ```bash
-npm install scroller-motion@beta framer-motion react
+npm install scroller-motion framer-motion react
 
 # or
 
-yarn add scroller-motion@beta framer-motion react
+yarn add scroller-motion framer-motion react
 ```
 
 > Note: Due to the use of [hooks](https://reactjs.org/docs/hooks-intro.html) the minimum required version of React is 16.8
