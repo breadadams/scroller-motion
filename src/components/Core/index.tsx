@@ -31,8 +31,10 @@ const DEFAULT_SPRING = {
 export const Core = forwardRef<CoreRef, CoreProps>(
   (
     {
+      as,
       children,
       disabled,
+      isElement,
       scale = DEFAULT_SCALE,
       spring = DEFAULT_SPRING,
       ...props
@@ -40,10 +42,13 @@ export const Core = forwardRef<CoreRef, CoreProps>(
     ref
   ) => {
     const [render, setRender] = useState(canUseDOM)
-    const childrenRef = useRef(null)
+    const containerRef = useRef(null)
+    const contentRef = useRef(null)
 
     const { height, width, scrollX, scrollY, x, y } = useCore({
-      ref: childrenRef,
+      containerRef: containerRef,
+      isElement,
+      ref: contentRef,
       scale,
       spring
     })
@@ -71,9 +76,12 @@ export const Core = forwardRef<CoreRef, CoreProps>(
     return (
       <Wrap
         {...props}
-        childrenRef={childrenRef}
+        as={as}
+        containerRef={containerRef}
+        contentRef={contentRef}
         disabled={isDisabled}
         height={height}
+        isElement={isElement}
         width={width}
         x={x}
         y={y}

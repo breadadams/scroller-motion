@@ -1,14 +1,17 @@
 import { useCallback, useEffect, useState } from 'react'
 import debounceFn from 'debounce-fn'
 
-import { ChildrenRef } from '../../types'
+import { ElementRef } from '../../types'
 
 const getSize = (el: HTMLElement) => ({
   height: el?.scrollHeight ?? 0,
   width: el?.scrollWidth ?? 0
 })
 
-export const useSize = (ref: ChildrenRef) => {
+/*
+ * Returns the width & height of the content within `<ScrollerMotion />`
+ */
+export const useContentSize = (ref: ElementRef) => {
   const [size, setSize] = useState({ height: 0, width: 0 })
 
   const onResize = useCallback(() => {

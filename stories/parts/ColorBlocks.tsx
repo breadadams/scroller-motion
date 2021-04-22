@@ -34,7 +34,7 @@ const COLOR_VERTICAL_VARIANTS: Variants = {
 }
 
 const ColorsWrap = styled.div<BlocksProps>`
-  padding: 0 30px 30px;
+  padding: 30px;
   display: flex;
   flex-direction: ${({ isVertical }) => (isVertical ? 'column' : 'row')};
 

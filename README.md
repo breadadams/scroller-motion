@@ -74,12 +74,31 @@ body {
 
 All props are optional.
 
+#### `as`
+
+type: `string | ComponentType` <br/>
+default: `div`
+
+A valid HTML tag or React component (similar to styled-component's [`as` prop](https://styled-components.com/docs/api#as-polymorphic-prop)).
+
 #### `disabled`
 
 type: `boolean` <br/>
 default: `false`
 
 Completly disables and unmounts the `ScrollerMotion` component. Any children will be rendered through a React `<Fragment>` in this case (thus falling back to native scrolling).
+
+#### `isElement`
+
+type: `boolean` <br/>
+default: `false`
+
+[**View demo**](https://scroller-motion.wombak.xyz/?path=/story/scrollermotion--is-element)
+
+When `true`, the `ScrollerMotion` element is considered the scrollable element, instead of the `window`. Under the hood framer-motion's
+[useElementScroll](https://www.framer.com/api/motion/motionvalue/#useelementscroll)
+is used, meaning you _must_ apply an `overflow` CSS
+property to the `ScrollerMotion` element.
 
 #### `scale`
 

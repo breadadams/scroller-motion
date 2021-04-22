@@ -1,11 +1,18 @@
-import { DetailedHTMLProps, HTMLAttributes, MutableRefObject } from 'react'
+import {
+  ComponentType,
+  DetailedHTMLProps,
+  HTMLAttributes,
+  RefObject
+} from 'react'
 import { SpringOptions } from 'popmotion'
 import { MotionValue } from 'framer-motion'
 
-type ChildrenRef = MutableRefObject<HTMLDivElement | null>
+type ElementRef = RefObject<HTMLElement>
 
 interface CoreProps extends DivElementProps {
+  as?: string | ComponentType<any>
   disabled?: boolean
+  isElement?: boolean
   scale?: number
   spring?: SpringProp
 }
@@ -27,10 +34,10 @@ interface ScrollerMotionValues {
 type SpringProp = SpringOptions | null | undefined | false
 
 export type {
-  ChildrenRef,
   CoreProps,
   CoreRef,
   DivElementProps,
+  ElementRef,
   MotionValue,
   ScrollerMotionValues,
   SpringOptions,

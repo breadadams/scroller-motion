@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components'
 import LinkTo from '@storybook/addon-links/react'
 
 const IntroWrap = styled.header`
-  padding: 40px;
+  padding: 40px 40px 20px;
 `
 
 const EMOJI_WRAP_SIZE = '100px'
@@ -12,12 +12,13 @@ const EmojiWrap = styled.div`
   width: ${EMOJI_WRAP_SIZE};
   height: ${EMOJI_WRAP_SIZE};
   line-height: ${EMOJI_WRAP_SIZE};
-  box-shadow: 0 2px 12px rgba(29, 29, 29, 0.15);
+  box-shadow: 0 2px 12px rgba(180, 200, 48, 0.5);
   margin: 0 auto 20px;
   font-size: 54px;
   text-align: center;
   border-radius: 8px;
   user-select: none;
+  background: #fff;
 `
 
 const IntroTitle = styled.h1`
@@ -97,6 +98,7 @@ const storyLinks = [
   { label: 'Default', path: 'default-story' },
   { label: 'Slow Scroll', path: 'scale' },
   { label: 'Custom Spring', path: 'spring' },
+  { label: 'Custom Element', path: 'is-element' },
   { label: 'Motion Listeners', path: 'motion-listeners' },
   { label: 'useScrollerMotion', path: 'use-scroller-motion' }
 ]

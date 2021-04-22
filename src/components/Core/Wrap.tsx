@@ -1,11 +1,16 @@
-import { FC, Fragment, useMemo } from 'react'
+import { FC, RefObject, useMemo } from 'react'
 import { motion } from 'framer-motion'
 
-import { ChildrenRef, DivElementProps, MotionValue } from '../../types'
+import {
+  ElementRef,
+  CoreProps,
+  DivElementProps,
+  MotionValue
+} from '../../types'
 
-interface Props extends DivElementProps {
-  childrenRef: ChildrenRef
-  disabled?: boolean
+interface Props extends Exclude<CoreProps, 'scale | spring'>, DivElementProps {
+  containerRef: ElementRef
+  contentRef: ElementRef
   height: number
   width: number
   x: MotionValue
@@ -20,34 +25,69 @@ const FIXED_STYLE = {
   bottom: 0
 }
 
+const ABSOLUTE_STYLE = {
+  ...FIXED_STYLE,
+  position: 'absolute'
+}
+
 export const Wrap: FC<Props> = ({
+  as: Component = 'div',
   children,
-  childrenRef,
+  containerRef,
+  contentRef,
   disabled,
   height,
+  isElement,
   style,
   width,
   x,
   y,
   ...props
 }) => {
-  const outerStyle = useMemo(
-    () => ({ ...style, ...(!disabled ? { height, width } : {}) }),
-    [disabled, height, style, width]
-  )
-  const fixedStyle = useMemo(() => (!disabled ? FIXED_STYLE : {}), [disabled])
-  const motionStyle = useMemo(
+  const containerStyle = useMemo(() => {
+    if (!disabled) {
+      return {
+        ...style,
+        ...(!isElement ? { height, width } : { position: 'relative' })
+      }
+    }
+
+    return style
+  }, [disabled, height, isElement, style, width])
+
+  const containerInnerStyle = useMemo(() => {
+    if (!disabled && isElement) {
+      return { height: height / 2, width: width / 2 }
+    }
+
+    return {}
+  }, [disabled, height, isElement, width])
+
+  const contentFrameStyle = useMemo(() => {
+    if (!disabled) {
+      return !isElement ? FIXED_STYLE : ABSOLUTE_STYLE
+    }
+
+    return {}
+  }, [disabled, isElement])
+
+  const contentStyle = useMemo(
     () => ({ x: !disabled ? x : 0, y: !disabled ? y : 0 }),
     [disabled, x, y]
   )
 
   return (
-    <div {...props} style={outerStyle}>
-      <div style={fixedStyle}>
-        <motion.div style={motionStyle} ref={childrenRef}>
-          {children}
-        </motion.div>
+    <Component {...props} ref={containerRef} style={containerStyle}>
+      <div style={containerInnerStyle}>
+        <div style={contentFrameStyle}>
+          <motion.div
+            style={contentStyle}
+            ref={contentRef as RefObject<HTMLDivElement>}
+          >
+            {children}
+          </motion.div>
+        </div>
       </div>
-    </div>
+    </Component>
   )
 }

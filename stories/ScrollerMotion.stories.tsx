@@ -148,6 +148,84 @@ export const Spring = (): JSX.Element => {
 }
 Spring.parameters = STORY_PARAMETERS
 
+/* `isElement` Story */
+
+const IsElementContents: FC = () => (
+  <>
+    <Intro>
+      Motion scroll on a (nested) DOM element via the <code>isElement</code>{' '}
+      prop.
+      <br />
+      <br />
+      When set to <code>true</code>, the <strong>ScrollerMotion</strong> element
+      is used as the overflow container (as opposed to <code>window</code>).
+      Under the hood framer-motion's{' '}
+      <a href="https://www.framer.com/api/motion/motionvalue/#useelementscroll">
+        <code>useElementScroll</code>
+      </a>{' '}
+      is used, meaning you <em>must</em> apply an <code>overflow</code> CSS
+      property to the <strong>ScrollerMotion</strong> element.
+    </Intro>
+  </>
+)
+IsElementContents.displayName = CONTENTS_DISPLAY_NAME
+
+const CUSTOM_ELEMENT_STYLES = {
+  width: '740px',
+  maxWidth: '75%',
+  height: '100vh',
+  margin: '20px auto 0',
+  overflow: 'auto',
+  boxShadow: '0 2px 12px rgba(29, 29, 29, 0.15)'
+}
+
+const CUSTOM_ELEMENT_HORIZONTAL_STYLES = {
+  width: '140vw',
+  maxWidth: 'initial',
+  height: '360px'
+}
+
+export const IsElement = (): JSX.Element => {
+  const [enabled, setEnabled] = useState(true)
+  const [isVertical, setIsVertical] = useState(true)
+
+  return (
+    <>
+      <ScrollerMotion disabled={!enabled}>
+        <IsElementContents />
+
+        <div
+          style={{
+            paddingBottom: 60,
+            paddingLeft: !isVertical ? 60 : 0,
+            paddingRight: !isVertical ? 60 : 0
+          }}
+        >
+          <ScrollerMotion
+            disabled={!enabled}
+            isElement
+            style={{
+              ...CUSTOM_ELEMENT_STYLES,
+              ...(!isVertical ? CUSTOM_ELEMENT_HORIZONTAL_STYLES : {})
+            }}
+          >
+            <ColorBlocks isVertical={isVertical} />
+          </ScrollerMotion>
+        </div>
+      </ScrollerMotion>
+
+      <CornerControls
+        isEnabled={enabled}
+        isVertical={isVertical}
+        onToggleDirection={() => setIsVertical((v) => !v)}
+        onToggleEnable={() => setEnabled((e) => !e)}
+      />
+    </>
+  )
+}
+IsElement.storyName = 'isElement'
+IsElement.parameters = STORY_PARAMETERS
+
 /* Motion Listeners Story */
 
 const MotionListenersContents: ContentsType = ({ isVertical }) => (
