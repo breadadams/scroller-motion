@@ -21,6 +21,7 @@
 1. [Props](#props)
 1. [useScrollerMotion](#usescrollermotion-hook)
 1. [Listeners](#motion-listeners)
+1. [Recipes](#recipes)
 1. [About](#about)
 1. [Contributing](#contributing)
 1. [License](#license)
@@ -170,6 +171,10 @@ export default () => {
 
 For accessing the _native_ scroll value (without any spring motion) we suggest using framer-motion's [`useViewportScroll`](https://www.framer.com/api/motion/motionvalue/#useviewportscroll).
 
+### Recipes
+
+- [**Scroll to hash**](https://github.com/wombak/scroller-motion/issues/3#issuecomment-817216563): Custom hook for handling scrolling to an element via a `#hash` anchor.
+
 ### About
 
 **Scroller-motion** was born from the need for motion/smooth scrolling in a couple of React projects. Given the fact that we were already using the beloved [`framer-motion`](https://github.com/framer/motion) for the rest of the animations & transitions, we decided to try it out for page scrolling too - and the results were impressive! Time for an emoji list:
@@ -188,8 +193,6 @@ It's still considered a `beta` release, with a public roadmap for the stable v1 
 
 ### Contributing
 
-Contributions are absolutely welcome, however given that the project is currently in beta an issue should be opened first - _if_ said contribution is development related. Check out the repository [projects](https://github.com/wombak/scroller-motion/projects) for information on the roadmap and other future ideas.
-
 These are the current scripts available for development:
 
 ```bash
@@ -207,6 +210,9 @@ npm run prettier:format
 
 # Check Prettier formatting
 npm run prettier:check
+
+# Run tests
+npm run test
 ```
 
 ### License
