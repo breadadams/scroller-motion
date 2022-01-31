@@ -21,14 +21,14 @@ export const useAxis = ({
     [refSize, scale, windowSize]
   )
 
-  const transformFrom = useMemo(() => [0, scaledSize - windowSize], [
-    scaledSize,
-    windowSize
-  ])
-  const transformTo = useMemo(() => [0, (refSize - windowSize) * -1], [
-    refSize,
-    windowSize
-  ])
+  const transformFrom = useMemo(
+    () => [0, scaledSize - windowSize],
+    [scaledSize, windowSize]
+  )
+  const transformTo = useMemo(
+    () => [0, (refSize - windowSize) * -1],
+    [refSize, windowSize]
+  )
 
   const axis = useTransform(axisSpring, transformFrom, transformTo, {
     clamp: false

@@ -1,4 +1,5 @@
-import React, {
+import {
+  forwardRef,
   useEffect,
   useImperativeHandle,
   useMemo,
@@ -27,7 +28,7 @@ const DEFAULT_SPRING = {
   stiffness: 200
 }
 
-export const Core = React.forwardRef<CoreRef, CoreProps>(
+export const Core = forwardRef<CoreRef, CoreProps>(
   (
     {
       children,
@@ -56,12 +57,10 @@ export const Core = React.forwardRef<CoreRef, CoreProps>(
 
     const isDisabled = useMemo(() => !render || disabled, [disabled, render])
 
-    const contextValue = useMemo(() => ({ scrollX, scrollY, x, y }), [
-      scrollX,
-      scrollY,
-      x,
-      y
-    ])
+    const contextValue = useMemo(
+      () => ({ scrollX, scrollY, x, y }),
+      [scrollX, scrollY, x, y]
+    )
 
     useEffect(() => {
       setRender(true)
