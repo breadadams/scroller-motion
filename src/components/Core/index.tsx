@@ -57,12 +57,10 @@ export const Core = forwardRef<CoreRef, CoreProps>(
 
     const isDisabled = useMemo(() => !render || disabled, [disabled, render])
 
-    const contextValue = useMemo(() => ({ scrollX, scrollY, x, y }), [
-      scrollX,
-      scrollY,
-      x,
-      y
-    ])
+    const contextValue = useMemo(
+      () => ({ scrollX, scrollY, x, y }),
+      [scrollX, scrollY, x, y]
+    )
 
     useEffect(() => {
       setRender(true)
