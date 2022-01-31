@@ -1,9 +1,9 @@
-name: Formatting
+name: Tests
 
 on: [push]
 
 jobs:
-  formatting-check:
+  run-tests:
     runs-on: ubuntu-latest
 
     steps:
@@ -12,4 +12,4 @@ jobs:
         with:
           node-version: 16
       - run: npm install
-      - run: npm run prettier:check
+      - run: npm run test
