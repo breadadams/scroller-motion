@@ -7,8 +7,11 @@
   <a href="https://scroller-motion.wombak.xyz/" target="_blank">
     <img src="https://raw.githubusercontent.com/storybooks/brand/master/badge/badge-storybook.svg" alt="Project Storybook">
   </a>
-  <a href="https://github.com/wombak/scroller-motion/actions?query=workflow%3AFormatting" target="_blank">
-    <img src="https://github.com/wombak/scroller-motion/workflows/Formatting/badge.svg" alt="Formatting Workflow Status" />
+  <a href="https://github.com/wombak/scroller-motion/actions/workflows/formatting.yml" target="_blank">
+    <img src="https://github.com/wombak/scroller-motion/actions/workflows/tests.yml/badge.svg" alt="Tests Workflow Status" />
+  </a>
+  <a href="https://github.com/wombak/scroller-motion/actions/workflows/formatting.yml" target="_blank">
+    <img src="https://github.com/wombak/scroller-motion/actions/workflows/formatting.yml/badge.svg" alt="Formatting Workflow Status" />
   </a>
 </p>
 
