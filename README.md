@@ -190,10 +190,6 @@ For accessing the _native_ scroll value (without any spring motion) we suggest u
 - 🎣 Built around React hooks
 - ⚖️ Only 2.2kb gzipped
 
-It's still considered a `beta` release, with a public roadmap for the stable v1 available [here](https://github.com/wombak/scroller-motion/projects/1).
-
-> Note: Currently **scroller-motion** only supports motion scrolling on the main window/body. The stable release _should_ allow for motion scrolling on any DOM element.
-
 ### Contributing
 
 These are the current scripts available for development:
