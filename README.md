@@ -80,32 +80,29 @@ All props are optional.
 
 #### `disabled`
 
-type: `boolean` <br/>
-default: `false`
-
-Completly disables and unmounts the `ScrollerMotion` component. Any children will be rendered through a React `<Fragment>` in this case (thus falling back to native scrolling).
+|                 |                                                                                                                                                                                  |
+| --------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Type**        | `boolean`                                                                                                                                                                        |
+| **Default**     | `false`                                                                                                                                                                          |
+| **Description** | Completly disables and unmounts the `ScrollerMotion` component. Any children will be rendered through a React `<Fragment>` in this case (thus falling back to native scrolling). |
 
 #### `scale`
 
-type: `number` <br/>
-default: `1`
-
-[**View demo**](https://scroller-motion.wombak.xyz/?path=/story/scrollermotion--custom-scale)
-
-Extends the scrollable length of the page, giving a "slow scroll" experience. For example if the page content is **1400px** in height, `<ScrollerMotion scale={1.5} />` would result in a scrollable length of **2100px** (`height * scale`).
-
-The lowest this value can be is `1`, anything lower will be disregarded and `1` will be used in its place.
+|                 |                                                                                                                                                                                                                                                                                                                                                                    |
+| --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Type**        | `number`                                                                                                                                                                                                                                                                                                                                                           |
+| **Default**     | `1`                                                                                                                                                                                                                                                                                                                                                                |
+| **Demo**        | [**View demo**](https://scroller-motion.wombak.xyz/?path=/story/scrollermotion--custom-scale)                                                                                                                                                                                                                                                                      |
+| **Description** | Extends the scrollable length of the page, giving a "slow scroll" experience. For example if the page content is **1400px** in height, `<ScrollerMotion scale={1.5} />` would result in a scrollable length of **2100px** (`height * scale`).<br/><br/> The lowest this value can be is `1`, anything lower will be disregarded and `1` will be used in its place. |
 
 #### `spring`
 
-type: [`SpringOptions`](https://github.com/Popmotion/popmotion/blob/ec4974a19789c3cebc4e14e1fde3b55cdeecf7b0/packages/popmotion/src/animations/spring/types.ts#L1) <br/>
-default: `{ mass: 1.25, stiffness: 200, damping: 50 }`
-
-[**View demo**](https://scroller-motion.wombak.xyz/?path=/story/scrollermotion--custom-spring)
-
-The main configuration object for the scroll's spring transform, basically the 2nd parameter to framer-motion's [useSpring](https://www.framer.com/api/motion/types/#spring).
-
-You can disable the spring scroll by passing a falsy value to this prop, for example: `<ScollerMotion spring={null} />`.
+|                 |                                                                                                                                                                                                                                                                                                                  |
+| --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Type**        | [`SpringOptions`](https://github.com/Popmotion/popmotion/blob/ec4974a19789c3cebc4e14e1fde3b55cdeecf7b0/packages/popmotion/src/animations/spring/types.ts#L1)                                                                                                                                                     |
+| **Default**     | `{ mass: 1.25, stiffness: 200, damping: 50 }`                                                                                                                                                                                                                                                                    |
+| **Demo**        | [**View demo**](https://scroller-motion.wombak.xyz/?path=/story/scrollermotion--custom-spring)                                                                                                                                                                                                                   |
+| **Description** | The main configuration object for the scroll's spring transform, basically the 2nd parameter to framer-motion's [useSpring](https://www.framer.com/api/motion/types/#spring).<br/><br/> You can disable the spring scroll by passing a falsy value to this prop, for example: `<ScollerMotion spring={null} />`. |
 
 ### `useScrollerMotion` hook
 
