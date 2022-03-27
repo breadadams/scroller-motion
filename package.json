@@ -36,8 +36,8 @@
     "debounce-fn": "^4.0.0"
   },
   "peerDependencies": {
-    "framer-motion": "^3 || ^4 || ^5 || ^6",
-    "react": "^16.8 || ^17"
+    "framer-motion": ">= 3",
+    "react": ">= ^16.8"
   },
   "devDependencies": {
     "@babel/core": "^7.16.12",
