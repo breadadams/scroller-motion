@@ -1,24 +1,10 @@
-import {
-  forwardRef,
-  useEffect,
-  useImperativeHandle,
-  useMemo,
-  useRef,
-  useState
-} from 'react'
+import { forwardRef, useImperativeHandle, useMemo, useRef } from 'react'
 
 import { Context } from '../../context'
 import { useCore } from '../../hooks'
 import { CoreProps, CoreRef } from '../../types'
 
 import { Wrap } from './Wrap'
-
-// https://github.com/JedWatson/exenv/blob/master/index.js
-const canUseDOM = !!(
-  typeof window !== 'undefined' &&
-  window.document &&
-  window.document.createElement
-)
 
 const DEFAULT_SCALE = 1
 
@@ -39,7 +25,6 @@ export const Core = forwardRef<CoreRef, CoreProps>(
     },
     ref
   ) => {
-    const [render, setRender] = useState(canUseDOM)
     const childrenRef = useRef(null)
 
     const { height, width, scrollX, scrollY, x, y } = useCore({
@@ -55,22 +40,16 @@ export const Core = forwardRef<CoreRef, CoreProps>(
       y
     ])
 
-    const isDisabled = useMemo(() => !render || disabled, [disabled, render])
-
     const contextValue = useMemo(
       () => ({ scrollX, scrollY, x, y }),
       [scrollX, scrollY, x, y]
     )
 
-    useEffect(() => {
-      setRender(true)
-    }, [])
-
     return (
       <Wrap
         {...props}
         childrenRef={childrenRef}
-        disabled={isDisabled}
+        disabled={disabled}
         height={height}
         width={width}
         x={x}
