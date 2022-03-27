@@ -185,7 +185,7 @@ For accessing the _native_ scroll value (without any spring motion) we suggest u
 - ⚙️ SSR compatible
 - 🤖 Fully typed w/ TypeScript
 - 🎣 Built around React hooks
-- ⚖️ Only 2.2kb gzipped
+- ⚖️ Only ~2kb gzipped
 
 ### Contributing
 
