@@ -173,7 +173,9 @@ For accessing the _native_ scroll value (without any spring motion) we suggest u
 
 ### Recipes
 
-- [**Scroll to hash**](https://github.com/wombak/scroller-motion/issues/3#issuecomment-817216563): Custom hook for handling scrolling to an element via a `#hash` anchor.
+- [**Hash anchor scroll**](https://github.com/wombak/scroller-motion/issues/3#issuecomment-817216563): Scroll the window to a DOM element when clicking a `#hash` anchor.
+- [**Horizontal scroll**](https://github.com/wombak/scroller-motion/issues/24#issuecomment-1105743496): Convert vertical mousewheel events to horizontal window scroll.
+- [**Tab scroll**](https://github.com/wombak/scroller-motion/issues/22#issuecomment-1119969437): Scroll the window to a DOM element when pressing the Tab key (useful for a11y purposes).
 
 ### About
 
