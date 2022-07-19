@@ -4,14 +4,14 @@
   <a href="https://www.npmjs.com/package/scroller-motion" target="_blank">
     <img src="https://img.shields.io/npm/v/scroller-motion?style=flat-square" alt="NPM Package Version" />
   </a>
-  <a href="https://scroller-motion.wombak.xyz/" target="_blank">
+  <a href="https://scroller-motion.js.org/" target="_blank">
     <img src="https://raw.githubusercontent.com/storybooks/brand/master/badge/badge-storybook.svg" alt="Project Storybook">
   </a>
-  <a href="https://github.com/wombak/scroller-motion/actions/workflows/formatting.yml" target="_blank">
-    <img src="https://github.com/wombak/scroller-motion/actions/workflows/tests.yml/badge.svg" alt="Tests Workflow Status" />
+  <a href="https://github.com/breadadams/scroller-motion/actions/workflows/formatting.yml" target="_blank">
+    <img src="https://github.com/breadadams/scroller-motion/actions/workflows/tests.yml/badge.svg" alt="Tests Workflow Status" />
   </a>
-  <a href="https://github.com/wombak/scroller-motion/actions/workflows/formatting.yml" target="_blank">
-    <img src="https://github.com/wombak/scroller-motion/actions/workflows/formatting.yml/badge.svg" alt="Formatting Workflow Status" />
+  <a href="https://github.com/breadadams/scroller-motion/actions/workflows/formatting.yml" target="_blank">
+    <img src="https://github.com/breadadams/scroller-motion/actions/workflows/formatting.yml/badge.svg" alt="Formatting Workflow Status" />
   </a>
 </p>
 
@@ -61,7 +61,7 @@ export default () => (
 )
 ```
 
-Most modern browsers implement an inertia bounce effect to the window while scrolling (upon reaching the start/end). This can cause unwanted visual effects, such as [flickering](https://github.com/wombak/scroller-motion/issues/7), when using **scroller-motion**.
+Most modern browsers implement an inertia bounce effect to the window while scrolling (upon reaching the start/end). This can cause unwanted visual effects, such as [flickering](https://github.com/breadadams/scroller-motion/issues/7), when using **scroller-motion**.
 
 To fix this, you can disable [`overscroll-behavior`](https://developer.mozilla.org/en-US/docs/Web/CSS/overscroll-behavior) in your project with the following CSS:
 
@@ -92,7 +92,7 @@ All props are optional.
 | --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | **Type**        | `number`                                                                                                                                                                                                                                                                                                                                                           |
 | **Default**     | `1`                                                                                                                                                                                                                                                                                                                                                                |
-| **Demo**        | [**View demo**](https://scroller-motion.wombak.xyz/?path=/story/scrollermotion--custom-scale)                                                                                                                                                                                                                                                                      |
+| **Demo**        | [**View demo**](https://scroller-motion.js.org/?path=/story/scrollermotion--custom-scale)                                                                                                                                                                                                                                                                          |
 | **Description** | Extends the scrollable length of the page, giving a "slow scroll" experience. For example if the page content is **1400px** in height, `<ScrollerMotion scale={1.5} />` would result in a scrollable length of **2100px** (`height * scale`).<br/><br/> The lowest this value can be is `1`, anything lower will be disregarded and `1` will be used in its place. |
 
 #### `spring`
@@ -101,12 +101,12 @@ All props are optional.
 | --------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Type**        | [`SpringOptions`](https://github.com/Popmotion/popmotion/blob/ec4974a19789c3cebc4e14e1fde3b55cdeecf7b0/packages/popmotion/src/animations/spring/types.ts#L1)                                                                                                                                                         |
 | **Default**     | `{ mass: 1.25, stiffness: 200, damping: 50 }`                                                                                                                                                                                                                                                                        |
-| **Demo**        | [**View demo**](https://scroller-motion.wombak.xyz/?path=/story/scrollermotion--custom-spring)                                                                                                                                                                                                                       |
+| **Demo**        | [**View demo**](https://scroller-motion.js.org/?path=/story/scrollermotion--custom-spring)                                                                                                                                                                                                                           |
 | **Description** | The main configuration object for the scroll's spring transform, basically the 2nd parameter to framer-motion's [useSpring](https://www.framer.com/docs/motionvalue/##usespring).<br/><br/> You can disable the spring scroll by passing a falsy value to this prop, for example: `<ScollerMotion spring={null} />`. |
 
 ### `useScrollerMotion` hook
 
-[**View demo**](https://scroller-motion.wombak.xyz/?path=/story/scrollermotion--use-scroller-motion)
+[**View demo**](https://scroller-motion.js.org/?path=/story/scrollermotion--use-scroller-motion)
 
 This hook allows you to consume the internal `MotionValue` values, returning an object of the following type:
 
@@ -138,7 +138,7 @@ export default () => (
 
 ### Motion Listeners
 
-[**View demo**](https://scroller-motion.wombak.xyz/?path=/story/scrollermotion--motion-listeners)
+[**View demo**](https://scroller-motion.js.org/?path=/story/scrollermotion--motion-listeners)
 
 Another approach if you need to read/use the internal `MotionValue` values is via the `ref` prop on `<ScrollerMotion />`. The type of the ref is the same as the object returned from [`useScrollerMotion`](#usescrollermotion-hook).
 
@@ -173,9 +173,9 @@ For accessing the _native_ scroll value (without any spring motion) we suggest u
 
 ### Recipes
 
-- [**Hash anchor scroll**](https://github.com/wombak/scroller-motion/issues/3#issuecomment-817216563): Scroll the window to a DOM element when clicking a `#hash` anchor.
-- [**Horizontal scroll**](https://github.com/wombak/scroller-motion/issues/24#issuecomment-1105743496): Convert vertical mousewheel events to horizontal window scroll.
-- [**Tab scroll**](https://github.com/wombak/scroller-motion/issues/22#issuecomment-1119969437): Scroll the window to a DOM element when pressing the Tab key (useful for a11y purposes).
+- [**Hash anchor scroll**](https://github.com/breadadams/scroller-motion/issues/3#issuecomment-817216563): Scroll the window to a DOM element when clicking a `#hash` anchor.
+- [**Horizontal scroll**](https://github.com/breadadams/scroller-motion/issues/24#issuecomment-1105743496): Convert vertical mousewheel events to horizontal window scroll.
+- [**Tab scroll**](https://github.com/breadadams/scroller-motion/issues/22#issuecomment-1119969437): Scroll the window to a DOM element when pressing the Tab key (useful for a11y purposes).
 
 ### About
 
@@ -215,7 +215,7 @@ npm run test
 
 ### License
 
-Released under the [MIT](https://github.com/wombak/scroller-motion/blob/master/LICENSE) License.<br>
-Authored and maintained by Wombak with help from [contributors](https://github.com/wombak/scroller-motion/contributors).
+Released under the [MIT](https://github.com/breadadams/scroller-motion/blob/master/LICENSE) License.<br>
+Authored and maintained by Brad Adams with help from [contributors](https://github.com/breadadams/scroller-motion/contributors).
 
-> [wombak.xyz](https://wombak.xyz) · GitHub [@wombak](https://github.com/wombak) · Twitter [@wombak_xyz](https://twitter.com/wombak_xyz)
+> [breadadams.com](https://breadadams.com) · GitHub [@breadadams](https://github.com/breadadams) · Twitter [@breadadams](https://twitter.com/breadadams)

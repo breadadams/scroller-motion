@@ -125,9 +125,9 @@ export const Intro: FC = ({ children }) => (
           alt="NPM Package Version"
         />
       </a>{' '}
-      <a href="https://github.com/wombak/scroller-motion" target="_blank">
+      <a href="https://github.com/breadadams/scroller-motion" target="_blank">
         <img
-          src="https://img.shields.io/github/stars/wombak/scroller-motion?style=social"
+          src="https://img.shields.io/github/stars/breadadams/scroller-motion?style=social"
           alt="Scroller-motion Repo stars"
         />
       </a>

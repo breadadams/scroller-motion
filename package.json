@@ -11,13 +11,13 @@
   "contributors": [
     "Rijk van Wel <rijk@uniti.be> (https://github.com/rijk)"
   ],
-  "homepage": "https://scroller-motion.wombak.xyz",
+  "homepage": "https://scroller-motion.js.org",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/wombak/scroller-motion"
+    "url": "git+https://github.com/breadadams/scroller-motion"
   },
   "bugs": {
-    "url": "https://github.com/wombak/scroller-motion/issues"
+    "url": "https://github.com/breadadams/scroller-motion/issues"
   },
   "scripts": {
     "start": "start-storybook",

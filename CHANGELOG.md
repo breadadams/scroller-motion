@@ -2,9 +2,9 @@
 
 ## v0.0.2
 
-- Feature: Add `useScrollerMotion` hook ([cff376f5](https://github.com/wombak/scroller-motion/commit/cff376f5))
-- Feature: Expose motion values on `ref` ([1e9c73e7](https://github.com/wombak/scroller-motion/commit/1e9c73e7))
-- Feature: Add support for X axis ([8e6ddd49](https://github.com/wombak/scroller-motion/commit/8e6ddd49))
+- Feature: Add `useScrollerMotion` hook ([cff376f5](https://github.com/breadadams/scroller-motion/commit/cff376f5))
+- Feature: Expose motion values on `ref` ([1e9c73e7](https://github.com/breadadams/scroller-motion/commit/1e9c73e7))
+- Feature: Add support for X axis ([8e6ddd49](https://github.com/breadadams/scroller-motion/commit/8e6ddd49))
 - Misc: Update docs and bump dependencies
 
 **⚠️ Breaking Changes**
