@@ -2,9 +2,9 @@
 
 ## [v1.1.1](https://github.com/breadadams/scroller-motion/releases/tag/v1.1.1)
 
-- Fix: Dependency version warning (6405b1e)
-- Chore: Vulnerable dependency updates (a3d970d)
-- Chore: Add more recipes to README (4e95d91)
+- Fix: Dependency version warning (https://github.com/breadadams/scroller-motion/commit/6405b1e)
+- Chore: Vulnerable dependency updates (https://github.com/breadadams/scroller-motion/commit/a3d970d)
+- Chore: Add more recipes to README (https://github.com/breadadams/scroller-motion/commit/4e95d91)
 
 ## [v1.1.0](https://github.com/breadadams/scroller-motion/releases/tag/v1.1.0)
 
