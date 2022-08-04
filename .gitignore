@@ -6,3 +6,4 @@ storybook-static
 yarn.lock
 .vscode
 .rts2*
+coverage

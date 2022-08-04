@@ -7,9 +7,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v1
-      - uses: actions/setup-node@v1
+      - name: Checkout branch
+        uses: actions/checkout@v2.4.2
+
+      - name: Setup Node environment
+        uses: actions/setup-node@v3.4.1
         with:
           node-version: 16
-      - run: npm install
-      - run: npm run prettier:check
+          registry-url: https://registry.npmjs.org
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Validate Prettier formatting
+        run: npm run prettier:check

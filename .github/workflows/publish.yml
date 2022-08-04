@@ -7,9 +7,13 @@ on:
 jobs:
   publish-npm:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+      - name: Checkout branch
+        uses: actions/checkout@v2.4.2
+
+      - name: Setup Node environment
+        uses: actions/setup-node@v3.4.1
         with:
           node-version: 16
           registry-url: https://registry.npmjs.org

@@ -19,7 +19,9 @@ type CoreRef = ScrollerMotionValues | undefined
 
 interface ScrollerMotionValues {
   scrollX: MotionValue
+  scrollXProgress: MotionValue
   scrollY: MotionValue
+  scrollYProgress: MotionValue
   x: MotionValue
   y: MotionValue
 }

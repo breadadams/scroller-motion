@@ -1,5 +1,5 @@
 import { useMemo } from 'react'
-import { useTransform } from 'framer-motion'
+import { transform, useTransform } from 'framer-motion'
 
 import { MotionValue } from '../../types'
 
@@ -34,8 +34,13 @@ export const useAxis = ({
     clamp: false
   })
 
+  const progress = useTransform(axisSpring, (v) =>
+    Math.max(0, Math.min(transform(v, transformFrom, [0, 1]), 1))
+  )
+
   return {
     axis,
+    progress,
     size: scaledSize
   }
 }
