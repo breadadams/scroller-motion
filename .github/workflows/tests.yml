@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-     - name: Checkout branch
+      - name: Checkout branch
         uses: actions/checkout@v2.4.2
 
       - name: Setup Node environment
