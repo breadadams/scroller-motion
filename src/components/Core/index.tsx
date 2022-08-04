@@ -27,22 +27,30 @@ export const Core = forwardRef<CoreRef, CoreProps>(
   ) => {
     const childrenRef = useRef(null)
 
-    const { height, width, scrollX, scrollY, x, y } = useCore({
+    const {
+      height,
+      width,
+      scrollX,
+      scrollXProgress,
+      scrollY,
+      scrollYProgress,
+      x,
+      y
+    } = useCore({
       ref: childrenRef,
       scale,
       spring
     })
 
-    useImperativeHandle(ref, () => ({ scrollX, scrollY, x, y }), [
-      scrollX,
-      scrollY,
-      x,
-      y
-    ])
+    useImperativeHandle(
+      ref,
+      () => ({ scrollX, scrollXProgress, scrollY, scrollYProgress, x, y }),
+      [scrollX, scrollXProgress, scrollY, scrollYProgress, x, y]
+    )
 
     const contextValue = useMemo(
-      () => ({ scrollX, scrollY, x, y }),
-      [scrollX, scrollY, x, y]
+      () => ({ scrollX, scrollXProgress, scrollY, scrollYProgress, x, y }),
+      [scrollX, scrollXProgress, scrollY, scrollYProgress, x, y]
     )
 
     return (

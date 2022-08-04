@@ -34,8 +34,13 @@ export const useAxis = ({
     clamp: false
   })
 
+  const progress = useTransform(axis, transformTo, [0, 1], {
+    clamp: true
+  })
+
   return {
     axis,
+    progress,
     size: scaledSize
   }
 }

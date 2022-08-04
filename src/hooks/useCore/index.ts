@@ -21,19 +21,36 @@ export const useCore = ({ ref, scale, spring }: Options) => {
 
   const { x: springX, y: springY } = useSpringScroll(spring)
 
-  const { axis: x, size: width } = useAxis({
+  const {
+    axis: x,
+    progress: progressX,
+    size: width
+  } = useAxis({
     axisSpring: springX,
     scale: innerScale,
     refSize: refWidth,
     windowSize: windowWidth
   })
 
-  const { axis: y, size: height } = useAxis({
+  const {
+    axis: y,
+    progress: progressY,
+    size: height
+  } = useAxis({
     axisSpring: springY,
     scale: innerScale,
     refSize: refHeight,
     windowSize: windowHeight
   })
 
-  return { height, width, scrollX: springX, scrollY: springY, x, y }
+  return {
+    height,
+    width,
+    scrollX: springX,
+    scrollXProgress: progressX,
+    scrollY: springY,
+    scrollYProgress: progressY,
+    x,
+    y
+  }
 }

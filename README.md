@@ -111,13 +111,23 @@ All props are optional.
 This hook allows you to consume the internal `MotionValue` values, returning an object of the following type:
 
 ```ts
-{ scrollX: MotionValue, scrollY: MotionValue, x: MotionValue, y: MotionValue }
+{
+  scrollX: MotionValue,
+  scrollXProgress: MotionValue,
+  scrollY: MotionValue,
+  scrollYProgress: MotionValue,
+  x: MotionValue,
+  y: MotionValue
+}
 ```
 
-- `scrollX` & `scrollY`: The current (spring) scroll position.
-- `x` & `y`: The current transform (useful for calculating scroll position when `scale` is in-use).
+- `scrollX` & `scrollY`: The current scroll position.
+- `scrollXProgress` & `scrollYProgress`: A `0` to `1` transform of `scrollX|scrollY`, similar to those returned by [`useScroll`](https://www.framer.com/docs/use-scroll/#usage).
+- `x` & `y`: A negative representation of `scrollX|scrollY`.
 
 It must be used within a `<ScrollerMotion />`, to read the values in the parent component see [Motion Listeners](#motion-listeners).
+
+> ℹ️ For accessing _native_ scroll values (without spring motion or scale calculation) we suggest using framer-motion's [`useScroll`](https://www.framer.com/docs/use-scroll).
 
 ```tsx
 import { ScrollerMotion, useScrollerMotion } from 'scroller-motion'
@@ -169,7 +179,7 @@ export default () => {
 }
 ```
 
-For accessing the _native_ scroll value (without any spring motion) we suggest using framer-motion's [`useScroll`](https://www.framer.com/docs/use-scroll).
+> ℹ️ For accessing _native_ scroll values (without spring motion or scale calculation) we suggest using framer-motion's [`useScroll`](https://www.framer.com/docs/use-scroll).
 
 ### Recipes
 
