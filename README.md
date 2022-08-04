@@ -169,7 +169,7 @@ export default () => {
 }
 ```
 
-For accessing the _native_ scroll value (without any spring motion) we suggest using framer-motion's [`useViewportScroll`](https://www.framer.com/api/motion/motionvalue/#useviewportscroll).
+For accessing the _native_ scroll value (without any spring motion) we suggest using framer-motion's [`useScroll`](https://www.framer.com/docs/use-scroll).
 
 ### Recipes
 
