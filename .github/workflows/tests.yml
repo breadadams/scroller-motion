@@ -13,3 +13,8 @@ jobs:
           node-version: 16
       - run: npm install
       - run: npm run test
+
+      - uses: codecov/codecov-action@v1
+        with:
+          files: ./coverage/coverage-final.json
+          fail_ci_if_error: true
