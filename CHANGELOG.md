@@ -1,5 +1,15 @@
 # `scroller-motion` Changelog
 
+## [v1.2.1](https://github.com/breadadams/scroller-motion/releases/tag/v1.2.1)
+
+- Fix: `framer-motion` v7 peer-dependency warnings ([#30](https://github.com/breadadams/scroller-motion/pull/30))
+
+## [v1.2.0](https://github.com/breadadams/scroller-motion/releases/tag/v1.2.0)
+
+- Feature: Expose new `scrollXProgress` and `scrollYProgress` values ([85b2847](https://github.com/breadadams/scroller-motion/commit/85b2847))
+- Chore: Update framer-motion dependency, deprecating useViewportScroll. This isn't a breaking change, however `^6.5.0` is the new advised version, expect peer dependency warnings ([0923d34](https://github.com/breadadams/scroller-motion/commit/0923d34))
+- Chore: Vulnerable dependency updates ([169a350](https://github.com/breadadams/scroller-motion/commit/169a350))
+
 ## [v1.1.1](https://github.com/breadadams/scroller-motion/releases/tag/v1.1.1)
 
 - Fix: Dependency version warning ([6405b1e](https://github.com/breadadams/scroller-motion/commit/6405b1e))
