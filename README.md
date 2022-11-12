@@ -196,7 +196,7 @@ export default () => {
 - 👂 Subscribe to the scroll values with `useScrollerMotion`
 - ⚙️ SSR compatible
 - 🤖 Fully typed w/ TypeScript
-- 🎣 Built around React hooks
+- 🪝 Built around React hooks
 - ⚖️ Only ~2kb gzipped
 
 ### Contributing
