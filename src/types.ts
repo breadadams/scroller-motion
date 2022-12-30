@@ -1,4 +1,4 @@
-import { DetailedHTMLProps, HTMLAttributes, MutableRefObject } from 'react'
+import { ComponentPropsWithoutRef, MutableRefObject } from 'react'
 import { MotionValue, useSpring } from 'framer-motion'
 
 type ChildrenRef = MutableRefObject<HTMLDivElement | null>
@@ -9,10 +9,7 @@ interface CoreProps extends DivElementProps {
   spring?: SpringProp
 }
 
-type DivElementProps = DetailedHTMLProps<
-  HTMLAttributes<HTMLDivElement>,
-  HTMLDivElement
->
+type DivElementProps = ComponentPropsWithoutRef<'div'>
 
 type CoreRef = ScrollerMotionValues | undefined
 
