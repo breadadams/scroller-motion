@@ -1,5 +1,10 @@
 # `scroller-motion` Changelog
 
+## [v1.2.2](https://github.com/breadadams/scroller-motion/releases/tag/v1.2.2)
+
+- Fix: `framer-motion` v8 peer-dependency warnings ([0a9063f](https://github.com/breadadams/scroller-motion/commit/0a9063f))
+- Chore: Internal dependency updates (React 18, Framer-motion 8, @testing-library, Storybook) ([0a9063f](https://github.com/breadadams/scroller-motion/commit/0a9063f))
+
 ## [v1.2.1](https://github.com/breadadams/scroller-motion/releases/tag/v1.2.1)
 
 - Fix: `framer-motion` v7 peer-dependency warnings ([#30](https://github.com/breadadams/scroller-motion/pull/30))
