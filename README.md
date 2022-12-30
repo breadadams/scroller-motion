@@ -97,12 +97,12 @@ All props are optional.
 
 #### `spring`
 
-|                 |                                                                                                                                                                                                                                                                                                                      |
-| --------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Type**        | [`SpringOptions`](https://github.com/Popmotion/popmotion/blob/ec4974a19789c3cebc4e14e1fde3b55cdeecf7b0/packages/popmotion/src/animations/spring/types.ts#L1)                                                                                                                                                         |
-| **Default**     | `{ mass: 1.25, stiffness: 200, damping: 50 }`                                                                                                                                                                                                                                                                        |
-| **Demo**        | [**View demo**](https://scroller-motion.js.org/?path=/story/scrollermotion--custom-spring)                                                                                                                                                                                                                           |
-| **Description** | The main configuration object for the scroll's spring transform, basically the 2nd parameter to framer-motion's [useSpring](https://www.framer.com/docs/motionvalue/##usespring).<br/><br/> You can disable the spring scroll by passing a falsy value to this prop, for example: `<ScollerMotion spring={null} />`. |
+|                 |                                                                                                                                                                                                                                                                                                          |
+| --------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Type**        | [`SpringOptions`](https://github.com/framer/motion/blob/2fa59a6e7c0a83647c8193ad37667a4f018143e2/packages/framer-motion/src/animation/types.ts#L31)                                                                                                                                                      |
+| **Default**     | `{ mass: 1.25, stiffness: 200, damping: 50 }`                                                                                                                                                                                                                                                            |
+| **Demo**        | [**View demo**](https://scroller-motion.js.org/?path=/story/scrollermotion--custom-spring)                                                                                                                                                                                                               |
+| **Description** | The main configuration object for the scroll's spring transform, basically the 2nd parameter to framer-motion's [useSpring](https://www.framer.com/docs/use-spring/).<br/><br/> You can disable the spring scroll by passing a falsy value to this prop, for example: `<ScollerMotion spring={null} />`. |
 
 ### `useScrollerMotion` hook
 
@@ -192,8 +192,8 @@ export default () => {
 **Scroller-motion** was born from the need for motion/smooth scrolling in a couple of React projects. Given the fact that we were already using the beloved [`framer-motion`](https://github.com/framer/motion) for the rest of the animations & transitions, we decided to try it out for page scrolling too - and the results were impressive! Time for an emoji list:
 
 - 🏀 Configurable motion via the `spring` prop
-- 🐌 "Slow scroll" via the `scale` prop
-- 👂 Subscribe to the scroll values with `useScrollerMotion`
+- 🖱 "Slow scroll" via the `scale` prop
+- 📡 Subscribe to the scroll values with `useScrollerMotion`
 - ⚙️ SSR compatible
 - 🤖 Fully typed w/ TypeScript
 - 🪝 Built around React hooks

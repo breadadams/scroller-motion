@@ -1,7 +1,7 @@
 /**
  * @jest-environment jsdom
  */
-import { renderHook } from '@testing-library/react-hooks'
+import { renderHook } from '@testing-library/react'
 import { act } from 'react-test-renderer'
 
 import { useWindowSize } from '../useWindowSize'

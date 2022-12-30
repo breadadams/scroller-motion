@@ -1,6 +1,5 @@
 import { DetailedHTMLProps, HTMLAttributes, MutableRefObject } from 'react'
-import { SpringOptions } from 'popmotion'
-import { MotionValue } from 'framer-motion'
+import { MotionValue, useSpring } from 'framer-motion'
 
 type ChildrenRef = MutableRefObject<HTMLDivElement | null>
 
@@ -25,6 +24,8 @@ interface ScrollerMotionValues {
   x: MotionValue
   y: MotionValue
 }
+
+type SpringOptions = Parameters<typeof useSpring>[1]
 
 type SpringProp = SpringOptions | null | undefined | false
 
