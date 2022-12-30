@@ -1,4 +1,4 @@
-import { FC, useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useMotionValue } from 'framer-motion'
 import LinkTo from '@storybook/addon-links/react'
 
@@ -23,11 +23,13 @@ const STORY_PARAMETERS = {
   }
 }
 
-type ContentsType = FC<{ isVertical: boolean }>
+interface ContentsProps {
+  isVertical: boolean
+}
 
 /* Default Story */
 
-const DefaultContents: ContentsType = ({ isVertical }) => (
+const DefaultContents = ({ isVertical }: ContentsProps) => (
   <>
     <Intro>
       The default appearance of <code>&lt;ScrollerMotion /&gt;</code>.<br />
@@ -64,7 +66,7 @@ DefaultStory.parameters = STORY_PARAMETERS
 
 /* `scale` Story */
 
-const ScaleContents: ContentsType = ({ isVertical }) => (
+const ScaleContents = ({ isVertical }: ContentsProps) => (
   <>
     <Intro>
       Custom <code>scale</code> prop.
@@ -104,7 +106,7 @@ Scale.parameters = STORY_PARAMETERS
 
 /* `spring` Story */
 
-const SpringContents: ContentsType = ({ isVertical }) => (
+const SpringContents = ({ isVertical }: ContentsProps) => (
   <>
     <Intro>
       Custom <code>spring</code> prop.
@@ -150,7 +152,7 @@ Spring.parameters = STORY_PARAMETERS
 
 /* Motion Listeners Story */
 
-const MotionListenersContents: ContentsType = ({ isVertical }) => (
+const MotionListenersContents = ({ isVertical }: ContentsProps) => (
   <>
     <Intro>
       Event listeners via the <code>ref</code> prop.
@@ -217,7 +219,7 @@ MotionListeners.parameters = {
 
 /* `useScrollerMotion` Story */
 
-const UseScrollerMotionContents: ContentsType = ({ isVertical }) => (
+const UseScrollerMotionContents = ({ isVertical }: ContentsProps) => (
   <>
     <Intro>
       Reading values via the <code>useScrollerMotion</code> hook.

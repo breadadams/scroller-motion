@@ -1,4 +1,4 @@
-import { FC, useCallback, useMemo } from 'react'
+import React, { useCallback, useMemo } from 'react'
 import styled, { css } from 'styled-components'
 import { motion, useCycle, Variants } from 'framer-motion'
 
@@ -64,7 +64,7 @@ const Color = styled(motion.section)<ColorProps>`
   }
 `
 
-const ColorSection: FC<ColorProps> = ({ background, isVertical }) => {
+const ColorSection = ({ background, isVertical }: ColorProps) => {
   const [variant, cycleVariant] = useCycle('default', 'expanded')
   const onClick = useCallback(() => cycleVariant(), [cycleVariant])
   const variants = useMemo(
@@ -103,7 +103,7 @@ const bgs: string[] = [
   'pink'
 ]
 
-export const ColorBlocks: FC<BlocksProps> = ({ isVertical = true }) => (
+export const ColorBlocks = ({ isVertical = true }: BlocksProps) => (
   <ColorsWrap isVertical={isVertical}>
     {bgs.map((bg) => (
       <ColorSection key={bg} background={bg} isVertical={isVertical} />

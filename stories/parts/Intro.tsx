@@ -1,4 +1,4 @@
-import { FC, useMemo } from 'react'
+import React, { useMemo } from 'react'
 import styled, { css } from 'styled-components'
 import LinkTo from '@storybook/addon-links/react'
 
@@ -101,7 +101,10 @@ const storyLinks = [
   { label: 'useScrollerMotion', path: 'use-scroller-motion' }
 ]
 
-const IntroLink: FC<{ path: string }> = ({ children, path }) => {
+const IntroLink = ({
+  children,
+  path
+}: React.PropsWithChildren<{ path: string }>) => {
   const isActive = useMemo(() => window.location.href.includes(path), [path])
 
   return (
@@ -113,7 +116,7 @@ const IntroLink: FC<{ path: string }> = ({ children, path }) => {
   )
 }
 
-export const Intro: FC = ({ children }) => (
+export const Intro = ({ children }: React.PropsWithChildren<{}>) => (
   <IntroWrap>
     <EmojiWrap>🛹</EmojiWrap>
     <IntroTitle>scroller-motion</IntroTitle>
