@@ -1,5 +1,10 @@
 # `scroller-motion` Changelog
 
+## [v1.2.3](https://github.com/breadadams/scroller-motion/releases/tag/v1.2.3)
+
+- Fix: `framer-motion` v9 and v10 peer-dependency warnings (#37)
+- Chore: Internal dependency and test updates
+
 ## [v1.2.2](https://github.com/breadadams/scroller-motion/releases/tag/v1.2.2)
 
 - Fix: `framer-motion` v8 peer-dependency warnings ([0a9063f](https://github.com/breadadams/scroller-motion/commit/0a9063f))
