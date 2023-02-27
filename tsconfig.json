@@ -16,5 +16,5 @@
     "jsxFragmentFactory": ""
   },
   "include": ["src"],
-  "exclude": ["**/__tests__/**"]
+  "exclude": ["**/*.test.ts"]
 }

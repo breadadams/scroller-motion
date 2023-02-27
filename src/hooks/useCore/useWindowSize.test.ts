@@ -1,10 +1,9 @@
 /**
  * @jest-environment jsdom
  */
-import { renderHook } from '@testing-library/react'
-import { act } from 'react-test-renderer'
+import { act, renderHook } from '@testing-library/react'
 
-import { useWindowSize } from '../useWindowSize'
+import { useWindowSize } from './useWindowSize'
 
 const WIDTH = 1024
 const HEIGHT = 768

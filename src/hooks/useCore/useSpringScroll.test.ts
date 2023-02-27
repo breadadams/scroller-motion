@@ -3,7 +3,7 @@
  */
 import { renderHook } from '@testing-library/react'
 
-import { useSpringScroll } from '../useSpringScroll'
+import { useSpringScroll } from './useSpringScroll'
 
 test('should return an `x` and `y`', () => {
   const { result } = renderHook(() => useSpringScroll(undefined))

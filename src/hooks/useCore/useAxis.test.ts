@@ -4,7 +4,7 @@
 import { renderHook } from '@testing-library/react'
 import { motionValue } from 'framer-motion'
 
-import { useAxis } from '../useAxis'
+import { useAxis } from './useAxis'
 
 const AXIS_SPRING = motionValue(0)
 const WINDOW_SIZE = 1000

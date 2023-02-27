@@ -3,7 +3,7 @@
  */
 import { renderHook } from '@testing-library/react'
 
-import { useSize } from '../useSize'
+import { useSize } from './useSize'
 
 test('should return a `width` and `height`', () => {
   const el = document.createElement('div')

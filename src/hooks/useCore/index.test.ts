@@ -3,7 +3,7 @@
  */
 import { renderHook } from '@testing-library/react'
 
-import { useCore } from '../index'
+import { useCore } from './index'
 
 test('should return an object', () => {
   const el = document.createElement('div')
